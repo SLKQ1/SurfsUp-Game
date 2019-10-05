@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/xid"
 )
 
 // Represents a lobby room in the game
@@ -58,6 +59,23 @@ func createLobby(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func createPlayer(w http.ResponseWriter, r *http.Request) {
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err == nil {
+		var newPlayer player
+		json.Unmarshal(reqBody, &newPlayer)
+
+		newPlayer.ID = len(players) + 1      // automatically set the appropriate player ID
+		newPlayer.Token = xid.New().String() // automatically generate and assign a secure token
+
+		players = append(players, newPlayer)
+		w.WriteHeader(http.StatusCreated)
+		json.NewEncoder(w).Encode(newPlayer)
+	} else {
+		w.WriteHeader(http.StatusPreconditionFailed)
+	}
+}
+
 func getAllLobbies(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(lobbies)
 }
@@ -81,6 +99,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", lobbyService)
 	router.HandleFunc("/createlobby", createLobby).Methods("POST")
+	router.HandleFunc("/createplayer", createPlayer).Methods("POST")
 	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
 	router.HandleFunc("/lobbies/{id}", getLobbyByID).Methods("GET")
 	http.ListenAndServe(":8080", router)
