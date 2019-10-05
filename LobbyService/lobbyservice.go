@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -49,11 +50,27 @@ func getAllLobbies(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(lobbies)
 }
 
+func getLobbyByID(w http.ResponseWriter, r *http.Request) {
+	lobbyID, _ := strconv.Atoi(mux.Vars(r)["id"])
+	found := false // Whether or not we found the target lobby in our array
+	for _, lobby := range lobbies {
+		found = lobby.ID == lobbyID
+		if found {
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(lobby)
+		}
+	}
+	if !found {
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
+
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", lobbyService)
 	router.HandleFunc("/createlobby", createLobby).Methods("POST")
 	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
+	router.HandleFunc("/lobbies/{id}", getLobbyByID).Methods("GET")
 	http.ListenAndServe(":8080", router)
 
 }
