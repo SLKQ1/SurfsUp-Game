@@ -17,7 +17,7 @@ type lobby struct {
 	GameType       string `json:"GameType"`       // The type of game the lobby is hosting, ex. Teams/Solo.
 	Joinable       bool   `json:"Joinable"`       // Whether or not the lobby is joinable
 	IsStarted      bool   `json:"IsStarted"`      // Whether or not the lobby is already started and the players in-game
-	CurrentPlayers int    `json:"CurrentPlayers"` // The current number of players in the lobby / game.
+	CurrentPlayers []int  `json:"CurrentPlayers"` // The IDs of the current players in the lobby / game.
 	MaximumPlayers int    `json:"MaximumPlayers"` // The maximum number of players allowed in the lobby / game.
 }
 type allLobbies []lobby
@@ -47,9 +47,9 @@ func createLobby(w http.ResponseWriter, r *http.Request) {
 		var newLobby lobby
 		json.Unmarshal(reqBody, &newLobby)
 
-		newLobby.ID = len(lobbies) + 1 // automatically set the appropriate lobby ID
-		newLobby.Joinable = true       // a new lobby should be joinable
-		newLobby.CurrentPlayers = 0    // a new lobby should have no players in it by default
+		newLobby.ID = len(lobbies) + 1    // automatically set the appropriate lobby ID
+		newLobby.Joinable = true          // a new lobby should be joinable
+		newLobby.CurrentPlayers = []int{} // a new lobby should have no players in it by default
 
 		lobbies = append(lobbies, newLobby)
 		w.WriteHeader(http.StatusCreated)
@@ -68,6 +68,19 @@ func createPlayer(w http.ResponseWriter, r *http.Request) {
 		newPlayer.ID = len(players) + 1      // automatically set the appropriate player ID
 		newPlayer.Token = xid.New().String() // automatically generate and assign a secure token
 
+		// Check if the lobby ID exists in the request, if it does attempt to add the player to that given lobby
+		if newPlayer.LobbyID != 0 && lobbyExists(newPlayer.LobbyID) {
+			lobby := lobbies[newPlayer.LobbyID-1]
+			if lobby.Joinable && len(lobby.CurrentPlayers) < lobby.MaximumPlayers {
+				lobby.CurrentPlayers = append(lobby.CurrentPlayers, newPlayer.ID)
+				lobbies[newPlayer.LobbyID-1] = lobby
+			} else {
+				newPlayer.LobbyID = 0 // reset the lobby id as the player wasn't able to successfully join a lobby
+			}
+		} else {
+			newPlayer.LobbyID = 0
+		}
+
 		players = append(players, newPlayer)
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(newPlayer)
@@ -82,13 +95,17 @@ func getAllLobbies(w http.ResponseWriter, r *http.Request) {
 
 func getLobbyByID(w http.ResponseWriter, r *http.Request) {
 	lobbyID, _ := strconv.Atoi(mux.Vars(r)["id"])
-	var offset int = lobbyID - 1 // Get the index offset
-	if offset >= 0 && offset < len(lobbies) {
+	if lobbyExists(lobbyID) {
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(lobbies[offset])
+		json.NewEncoder(w).Encode(lobbies[lobbyID-1])
 	} else {
 		w.WriteHeader(http.StatusNoContent)
 	}
+}
+
+func lobbyExists(lobbyID int) bool {
+	var offset int = lobbyID - 1 // Get the index offset
+	return offset >= 0 && offset < len(lobbies)
 }
 
 func main() {
