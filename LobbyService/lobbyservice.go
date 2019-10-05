@@ -22,7 +22,7 @@ type lobby struct {
 }
 type allLobbies []lobby
 
-// Represents players in the game
+// Represents a player in the game
 type player struct {
 	ID          int    `json:"ID"`
 	Token       string `json:"Token"`       // The Token of the player will serve as a secret between a player and the lobby service
@@ -116,6 +116,36 @@ func getPlayerByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func updatePlayerByID(w http.ResponseWriter, r *http.Request) {
+	reqBody, err := ioutil.ReadAll(r.Body)
+
+	if err == nil {
+		playerID, _ := strconv.Atoi(mux.Vars(r)["id"])
+
+		if idExist(playerID, len(players)) {
+			currentPlayer := players[playerID-1]
+			var playerUpdate player
+			json.Unmarshal(reqBody, &playerUpdate)
+
+			if playerUpdate.Token == currentPlayer.Token {
+				playerUpdate.ID = currentPlayer.ID // Make sure player ID is not modifed during the patch.
+
+				// TODO CHECK CHANGES TO LOBBY THEN ADD OR JOIN THE LOBBY ACCORDINGLY
+				// TODO CHECK CHANGES TO READY STATUS
+
+				players[playerID-1] = playerUpdate
+				w.WriteHeader(http.StatusOK)
+			} else {
+				w.WriteHeader(http.StatusUnauthorized)
+			}
+		} else {
+			w.WriteHeader(http.StatusNoContent)
+		}
+	}
+	w.WriteHeader(http.StatusPreconditionFailed)
+
+}
+
 func idExist(id, length int) bool {
 	var offset int = id - 1 // Get the index offset
 	return offset >= 0 && offset < length
@@ -129,6 +159,7 @@ func main() {
 	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
 	router.HandleFunc("/lobbies/{id}", getLobbyByID).Methods("GET")
 	router.HandleFunc("/players/{id}", getPlayerByID).Methods("GET")
+	router.HandleFunc("/players/{id}", updatePlayerByID).Methods("PATCH")
 	http.ListenAndServe(":8080", router)
 
 }
