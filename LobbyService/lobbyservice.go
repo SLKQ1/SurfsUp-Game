@@ -69,10 +69,11 @@ func createPlayer(w http.ResponseWriter, r *http.Request) {
 		newPlayer.Token = xid.New().String() // automatically generate and assign a secure token
 
 		// Check if the lobby ID exists in the request, if it does attempt to add the player to that given lobby
-		if newPlayer.LobbyID != 0 && lobbyExists(newPlayer.LobbyID) {
+		if newPlayer.LobbyID != 0 && idExist(newPlayer.LobbyID, len(lobbies)) {
 			lobby := lobbies[newPlayer.LobbyID-1]
-			if lobby.Joinable && len(lobby.CurrentPlayers) < lobby.MaximumPlayers {
+			if lobby.Joinable {
 				lobby.CurrentPlayers = append(lobby.CurrentPlayers, newPlayer.ID)
+				lobby.Joinable = len(lobby.CurrentPlayers) < lobby.MaximumPlayers
 				lobbies[newPlayer.LobbyID-1] = lobby
 			} else {
 				newPlayer.LobbyID = 0 // reset the lobby id as the player wasn't able to successfully join a lobby
@@ -95,7 +96,7 @@ func getAllLobbies(w http.ResponseWriter, r *http.Request) {
 
 func getLobbyByID(w http.ResponseWriter, r *http.Request) {
 	lobbyID, _ := strconv.Atoi(mux.Vars(r)["id"])
-	if lobbyExists(lobbyID) {
+	if idExist(lobbyID, len(lobbies)) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(lobbies[lobbyID-1])
 	} else {
@@ -103,9 +104,21 @@ func getLobbyByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func lobbyExists(lobbyID int) bool {
-	var offset int = lobbyID - 1 // Get the index offset
-	return offset >= 0 && offset < len(lobbies)
+func getPlayerByID(w http.ResponseWriter, r *http.Request) {
+	playerID, _ := strconv.Atoi(mux.Vars(r)["id"])
+	if idExist(playerID, len(players)) {
+		player := players[playerID-1]
+		player.Token = "redacted" // filter player secret token
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(player)
+	} else {
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
+
+func idExist(id, length int) bool {
+	var offset int = id - 1 // Get the index offset
+	return offset >= 0 && offset < length
 }
 
 func main() {
@@ -115,6 +128,7 @@ func main() {
 	router.HandleFunc("/createplayer", createPlayer).Methods("POST")
 	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
 	router.HandleFunc("/lobbies/{id}", getLobbyByID).Methods("GET")
+	router.HandleFunc("/players/{id}", getPlayerByID).Methods("GET")
 	http.ListenAndServe(":8080", router)
 
 }
