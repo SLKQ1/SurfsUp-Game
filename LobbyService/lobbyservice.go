@@ -82,15 +82,11 @@ func getAllLobbies(w http.ResponseWriter, r *http.Request) {
 
 func getLobbyByID(w http.ResponseWriter, r *http.Request) {
 	lobbyID, _ := strconv.Atoi(mux.Vars(r)["id"])
-	found := false // Whether or not we found the target lobby in our array
-	for _, lobby := range lobbies {
-		found = lobby.ID == lobbyID
-		if found {
-			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(lobby)
-		}
-	}
-	if !found {
+	var offset int = lobbyID - 1 // Get the index offset
+	if offset >= 0 && offset < len(lobbies) {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(lobbies[offset])
+	} else {
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
