@@ -45,10 +45,15 @@ func createLobby(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getAllLobbies(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(lobbies)
+}
+
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", lobbyService)
 	router.HandleFunc("/createlobby", createLobby).Methods("POST")
+	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
 	http.ListenAndServe(":8080", router)
 
 }
