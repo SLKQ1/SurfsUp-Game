@@ -21,7 +21,18 @@ type lobby struct {
 }
 type allLobbies []lobby
 
+// Represents players in the game
+type player struct {
+	ID          int    `json:"ID"`          // The ID of the player will serve as a secret between the player and the lobby service
+	PlayerName  string `json:"PlayerName"`  // The name of the player shown in-game
+	LobbyID     int    `json:"LobbyID"`     // The lobby the player is currently joined. 0 if player is not in any lobby.
+	PlayerTeam  string `json:"PlayerTeam"`  // The team name or team color the player is currently on.
+	PlayerReady bool   `json:"PlayerReady"` // Whether or not the player is ready to play whilst in a lobby.
+}
+type allPlayers []player
+
 var lobbies = allLobbies{}
+var players = allPlayers{}
 
 func lobbyService(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Surfs Up! - Lobby Service")
