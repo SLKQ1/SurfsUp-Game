@@ -127,23 +127,54 @@ func updatePlayerByID(w http.ResponseWriter, r *http.Request) {
 			var playerUpdate player
 			json.Unmarshal(reqBody, &playerUpdate)
 
-			if playerUpdate.Token == currentPlayer.Token {
+			if playerUpdate.Token == currentPlayer.Token { // make sure the player is authenticated
 				playerUpdate.ID = currentPlayer.ID // Make sure player ID is not modifed during the patch.
 
-				// TODO CHECK CHANGES TO LOBBY THEN ADD OR JOIN THE LOBBY ACCORDINGLY
-				// TODO CHECK CHANGES TO READY STATUS
+				// Lobby has been modified modify data structures accordingly
+				if playerUpdate.LobbyID != currentPlayer.LobbyID {
+					if playerUpdate.LobbyID == 0 { // The player has left a lobby
+						lobby := lobbies[currentPlayer.LobbyID-1] // get the lobby the player is curently in
 
+						// Remove the players ID from the lobby it's currently in
+						i := 0
+						for _, playerID := range lobby.CurrentPlayers {
+							if playerID != currentPlayer.ID {
+								lobby.CurrentPlayers[i] = playerID
+								i++
+							}
+						}
+						lobby.CurrentPlayers = lobby.CurrentPlayers[:i]
+						lobby.Joinable = len(lobby.CurrentPlayers) < lobby.MaximumPlayers
+						lobbies[currentPlayer.LobbyID-1] = lobby
+					} else if currentPlayer.LobbyID == 0 { // The player wants to join a lobby
+						if idExist(playerUpdate.LobbyID, len(lobbies)) {
+							lobby := lobbies[playerUpdate.LobbyID-1]
+							if lobby.Joinable {
+								lobby.CurrentPlayers = append(lobby.CurrentPlayers, playerUpdate.ID)
+								lobby.Joinable = len(lobby.CurrentPlayers) < lobby.MaximumPlayers
+								lobbies[playerUpdate.LobbyID-1] = lobby
+							} else {
+								playerUpdate.LobbyID = 0
+							}
+						}
+					} else {
+						// Dont change lobby as the player is trying to join a lobby without leaving the one they are currently in first.
+						playerUpdate.LobbyID = currentPlayer.LobbyID
+					}
+
+				}
 				players[playerID-1] = playerUpdate
 				w.WriteHeader(http.StatusOK)
+				json.NewEncoder(w).Encode(playerUpdate)
 			} else {
 				w.WriteHeader(http.StatusUnauthorized)
 			}
 		} else {
 			w.WriteHeader(http.StatusNoContent)
 		}
+	} else {
+		w.WriteHeader(http.StatusPreconditionFailed)
 	}
-	w.WriteHeader(http.StatusPreconditionFailed)
-
 }
 
 func idExist(id, length int) bool {
