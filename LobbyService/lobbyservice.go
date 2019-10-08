@@ -77,9 +77,11 @@ func createPlayer(w http.ResponseWriter, r *http.Request) {
 				lobbies[newPlayer.LobbyID-1] = lobby
 			} else {
 				newPlayer.LobbyID = 0 // reset the lobby id as the player wasn't able to successfully join a lobby
+				newPlayer.PlayerReady = false
 			}
 		} else {
 			newPlayer.LobbyID = 0
+			newPlayer.PlayerReady = false
 		}
 
 		players = append(players, newPlayer)
@@ -155,6 +157,7 @@ func updatePlayerByID(w http.ResponseWriter, r *http.Request) {
 								lobbies[playerUpdate.LobbyID-1] = lobby
 							} else {
 								playerUpdate.LobbyID = 0
+								playerUpdate.PlayerReady = false
 							}
 						}
 					} else {
