@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateScript : MonoBehaviour
+public class MysteryBoxRotateScript : MonoBehaviour
 {
     public Vector3 RotateAmount; //degrees per second to rotate 
 
