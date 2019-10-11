@@ -110,7 +110,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 120
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -243,10 +243,10 @@ MonoBehaviour:
   slidingEnabled: 1
   movementConfig:
     autoBhop: 1
-    gravity: 20
+    gravity: 15
     jumpForce: 6.5
-    friction: 6
-    maxSpeed: 6
+    friction: 7
+    maxSpeed: 10
     maxVelocity: 50
     slopeLimit: 45
     clampAirSpeed: 1
