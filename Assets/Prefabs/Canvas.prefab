@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 485294320630392820}
   m_HandleRect: {fileID: 4317205268376863175}
-  m_Direction: 3
+  m_Direction: 2
   m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
@@ -1191,6 +1191,7 @@ GameObject:
   - component: {fileID: 621364061527325289}
   - component: {fileID: 1564166006642578094}
   - component: {fileID: 8230473983002734928}
+  - component: {fileID: 5389662724542771767}
   m_Layer: 5
   m_Name: ButtonScrollList
   m_TagString: Untagged
@@ -1288,6 +1289,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5389662724542771767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4029615401180358647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd75eb6e68a0f4c01bef3e61cc235a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonTemplate: {fileID: 4937892510178463013}
 --- !u!1 &4219768694005861687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,13 +1414,14 @@ GameObject:
   - component: {fileID: 4198755433837256026}
   - component: {fileID: 9204001244668858640}
   - component: {fileID: 7037557475256212190}
+  - component: {fileID: 954192591895691164}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5251322019305835919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1422,9 +1437,9 @@ RectTransform:
   m_Father: {fileID: 6575538702484822837}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 625, y: -15}
   m_SizeDelta: {x: 1250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4198755433837256026
@@ -1506,6 +1521,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &954192591895691164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4937892510178463013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aedbec4f4d5a423cb3ba36c64fb6efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myText: {fileID: 6194306936285169905}
+  lobbyNum: {fileID: 5389662724542771767}
 --- !u!1 &5112775714026101349
 GameObject:
   m_ObjectHideFlags: 0
