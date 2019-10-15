@@ -10,13 +10,15 @@ public class LobbyManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject lobbyListMenu;
     public GameObject hostGameMenu;
+    public GameObject lobbyJoinMenu; 
 
     // Start is called before the first frame update
     private void Start()
     {
         Instance = this;
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false); 
+        hostGameMenu.SetActive(false);
+        lobbyJoinMenu.SetActive(false); 
         DontDestroyOnLoad(gameObject); 
     }
 
@@ -24,16 +26,28 @@ public class LobbyManager : MonoBehaviour
     public void HostButton()
     {
         Debug.Log("Host");
+        hostGameMenu.SetActive(true);
         mainMenu.SetActive(false);
-        hostGameMenu.SetActive(true); 
+        lobbyJoinMenu.SetActive(false);
     }
 
     // button to display lobbies
     public void LobbyListButton()
     {
         Debug.Log("list of lobbies");
+        lobbyListMenu.SetActive(true);
         mainMenu.SetActive(false);
-        lobbyListMenu.SetActive(true); 
+        lobbyJoinMenu.SetActive(false);
+    }
+
+    // button that is each lobby instance in lobbyListMenu
+    public void LobbyInstanceButton()
+    {
+        lobbyJoinMenu.SetActive(true); 
+        mainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        hostGameMenu.SetActive(false); 
+
     }
 
     // backbutton
@@ -41,7 +55,8 @@ public class LobbyManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false); 
+        hostGameMenu.SetActive(false);
+        lobbyJoinMenu.SetActive(false);
 
     }
 
