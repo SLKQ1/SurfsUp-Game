@@ -33,6 +33,15 @@ type player struct {
 }
 type allPlayers []player
 
+// Represents a headless unity server
+type server struct {
+	ID        int    `json:"ID"`
+	LobbyID   int    `json:"LobbyID"`   // The lobby ID the server is started with
+	IPAddress string `json:"IPAddress"` // The IPAddress of the unity game server
+	Port      int    `json:"Port"`      // The Port of the unity game server
+}
+type allServers []server
+
 var lobbies = allLobbies{}
 var players = allPlayers{}
 
