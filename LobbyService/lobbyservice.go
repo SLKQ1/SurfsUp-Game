@@ -189,6 +189,10 @@ func updatePlayerByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
+	// TODO
+}
+
 func idExist(id, length int) bool {
 	var offset int = id - 1 // Get the index offset
 	return offset >= 0 && offset < length
@@ -201,6 +205,7 @@ func main() {
 	router.HandleFunc("/createplayer", createPlayer).Methods("POST")
 	router.HandleFunc("/lobbies", getAllLobbies).Methods("GET")
 	router.HandleFunc("/lobbies/{id}", getLobbyByID).Methods("GET")
+	router.HandleFunc("/getserver/{id}", getServerByLobbyID).Methods("GET")
 	router.HandleFunc("/players/{id}", getPlayerByID).Methods("GET")
 	router.HandleFunc("/players/{id}", updatePlayerByID).Methods("PATCH")
 	http.ListenAndServe(":8080", router)
