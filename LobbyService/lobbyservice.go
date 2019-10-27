@@ -190,7 +190,21 @@ func updatePlayerByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
-	// TODO
+	lobbyID, _ := strconv.Atoi(mux.Vars(r)["id"])
+	if idExist(lobbyID, len(lobbies)) {
+		lobby := lobbies[lobbyID-1]
+		if len(lobby.CurrentPlayers) == lobby.MaximumPlayers {
+			w.WriteHeader(http.StatusOK)
+			// TODO Check if Server is already launched
+			// TODO Create or get Server JSON object
+			// TODO Launch a Headless Unity Server
+
+		} else {
+			w.WriteHeader(http.StatusPreconditionFailed)
+		}
+	} else {
+		w.WriteHeader(http.StatusNoContent)
+	}
 }
 
 func idExist(id, length int) bool {
