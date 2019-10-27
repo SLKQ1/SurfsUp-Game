@@ -42,6 +42,7 @@ type server struct {
 }
 type allServers []server
 
+var servers = allServers{}
 var lobbies = allLobbies{}
 var players = allPlayers{}
 
@@ -194,11 +195,31 @@ func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
 	if idExist(lobbyID, len(lobbies)) {
 		lobby := lobbies[lobbyID-1]
 		if len(lobby.CurrentPlayers) == lobby.MaximumPlayers {
-			w.WriteHeader(http.StatusOK)
-			// TODO Check if Server is already launched
-			// TODO Create or get Server JSON object
-			// TODO Launch a Headless Unity Server
 
+			// Try getting the server based on the lobbyID
+			var unityServer *server
+			for _, server := range servers {
+				if server.LobbyID == lobbyID {
+					unityServer = &server
+				}
+			}
+
+			// Create a new server
+			if unityServer == nil {
+
+				// TODO Launch a Headless Unity Server
+
+				unityServer := &server{
+					ID:        len(servers) + 1,
+					LobbyID:   lobbyID,
+					IPAddress: "0.0.0.0",
+					Port:      12345,
+				}
+
+				servers = append(servers, *unityServer)
+			}
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(*unityServer)
 		} else {
 			w.WriteHeader(http.StatusPreconditionFailed)
 		}
