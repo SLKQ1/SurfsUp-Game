@@ -209,7 +209,7 @@ func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
 
 				// TODO Launch a Headless Unity Server
 
-				unityServer := &server{
+				unityServer = &server{
 					ID:        len(servers) + 1,
 					LobbyID:   lobbyID,
 					IPAddress: "0.0.0.0",
@@ -219,7 +219,7 @@ func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
 				servers = append(servers, *unityServer)
 			}
 			w.WriteHeader(http.StatusOK)
-			json.NewEncoder(w).Encode(*unityServer)
+			json.NewEncoder(w).Encode(&unityServer)
 		} else {
 			w.WriteHeader(http.StatusPreconditionFailed)
 		}
