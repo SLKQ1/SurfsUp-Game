@@ -12,7 +12,7 @@ namespace Mirror
     {
         public ushort port = 7777;
 
-        [Tooltip("Nagle Algorithm can be disabled by enabling NoDelay")]
+       [Tooltip("Nagle Algorithm can be disabled by enabling NoDelay")]
         public bool NoDelay = true;
 
         [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Use MaxMessageSizeFromClient or MaxMessageSizeFromServer instead.")]
@@ -33,6 +33,25 @@ namespace Mirror
 
         void Awake()
         {
+            // Parse command line arguments and set the transport port if specified by the --port flag.
+            string[] args = System.Environment.GetCommandLineArgs();
+            if (args.Length > 0)
+            {
+                bool portSet = false;
+                foreach (string s in args)
+                {
+                    if(portSet)
+                    {
+                        port = ushort.Parse(s);
+                        break;
+                    } else if(s.ToLower().Equals("--port"))
+                    {
+                        portSet = true;
+                    }
+
+                }
+            }
+
             // tell Telepathy to use Unity's Debug.Log
             Telepathy.Logger.Log = Debug.Log;
             Telepathy.Logger.LogWarning = Debug.LogWarning;
