@@ -10,30 +10,31 @@ public class JoinLobby : MonoBehaviour
 
     public InputField PlayerName;
     public InputField PlayerTeamColour;
-    public string LobbyID;
+    public int LobbyID;
     // private var to hold playerInfo var
     //private PlayerInfo NewPlayer; 
 
-    public JoinLobby(string lobbyID)
+    public JoinLobby(int lobbyID)
     {
-        LobbyID = lobbyID;
-        //Debug.Log("Lobby ID is now: " + LobbyID);
+        this.LobbyID = lobbyID;
+        Debug.Log("Lobby ID is now: " + LobbyID);
     }
-    //public string LobbyID { get; set; }
 
     // function to create a player by sending a post request to API
     // function then returns a new player of type PlayerInfo
-    public static PlayerInfo CreatePlayer(string PlayerName, string PlayerTeam)
+    public static PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
     {
-
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080//players/create");
+        // temp hard code so that it works for the demo 
+        LobbyID = 2; 
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 
         using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
         {
             //'{"PlayerName": "Player 1", "PlayerTeam": "Green"}'
-            string json = "{\"PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}";
+            //Debug.Log("{\"LobbyID\":" + LobbyID +  ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}");
+            string json = "{\"LobbyID\":" + LobbyID + ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}";
             streamWriter.Write(json); 
         }
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -47,32 +48,23 @@ public class JoinLobby : MonoBehaviour
         }
     }
 
-    //function to join lobby with created player by sending patch request to API
-    public void Join(PlayerInfo NewPlayer, string LobbyID)
-    {
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/" + NewPlayer.ID);
-        httpWebRequest.ContentType = "application/json";
-        httpWebRequest.Method = "PATCH";
+    ////function to join lobby with created player by sending patch request to API
+    //public void Join(PlayerInfo NewPlayer, int LobbyID)
+    //{
+    //    Debug.Log("Player ID: " + NewPlayer.ID);
+    //    var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/" + NewPlayer.ID);
+    //    httpWebRequest.ContentType = "application/json";
+    //    httpWebRequest.Method = "PATCH";
 
-        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-        {
-            //// if player is not in a lobby then updte
-            //if (NewPlayer.LobbyID == 0)
-            //{
-            //    // update lobby id to lobby that was selected
-            //    //{"LobbyID":1,"PlayerName":"Faiz","PlayerTeam":"Blue", "Token":"ur token"}
-            //    string json = "{\"LobbyID\":" + LobbyID + "," + "\"PlayerName\":" + "\"" + NewPlayer.PlayerName + "\"," + "\"PlayerTeam\":" + "\"" + NewPlayer.PlayerTeam + "\"," + "\"Token\":" + "\"" + NewPlayer.Token + "\"" + "}";
-            //    streamWriter.Write(json);
-            //}
-
-            // update lobby id to lobby that was selected
-            //{"LobbyID":1,"PlayerName":"Faiz","PlayerTeam":"Blue", "Token":"ur token"}
-            Debug.Log("{\"LobbyID\":" + LobbyID + "," + "\"PlayerName\":" + "\"" + NewPlayer.PlayerName + "\"," + "\"PlayerTeam\":" + "\"" + NewPlayer.PlayerTeam + "\"," + "\"Token\":" + "\"" + NewPlayer.Token + "\"" + "}");
-            string json = "{\"LobbyID\":" + LobbyID + "," + "\"PlayerName\":" + "\"" + NewPlayer.PlayerName + "\"," + "\"PlayerTeam\":" + "\"" + NewPlayer.PlayerTeam + "\"," + "\"Token\":" + "\"" + NewPlayer.Token + "\"" + "}";
-            streamWriter.Write(json);
+    //    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+    //    {
+    //        //{"LobbyID":1,"PlayerName":"Faiz","PlayerTeam":"Blue", "Token":"ur token"}
+    //        Debug.Log("{\"LobbyID\":" + LobbyID + "," + "\"PlayerName\":" + "\"" + NewPlayer.PlayerName + "\"," + "\"PlayerTeam\":" + "\"" + NewPlayer.PlayerTeam + "\"," + "\"Token\":" + "\"" + NewPlayer.Token + "\"" + "}");
+    //        string json = "{\"LobbyID\":" + LobbyID + "," + "\"PlayerName\":" + "\"" + NewPlayer.PlayerName + "\"," + "\"PlayerTeam\":" + "\"" + NewPlayer.PlayerTeam + "\"," + "\"Token\":" + "\"" + NewPlayer.Token + "\"" + "}";
+    //        streamWriter.Write(json);
 
 
-        }
+    //    }
         //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
         //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
         //{
@@ -83,21 +75,24 @@ public class JoinLobby : MonoBehaviour
 
         //}
 
-    }
+    //}
 
     public void OnClick()
     {
 
-        // creates a new player  
-        PlayerInfo newPlayer = CreatePlayer(PlayerName.text, PlayerTeamColour.text);
+        // creates a new player      
+        PlayerInfo newPlayer = CreatePlayer(this.LobbyID, PlayerName.text, PlayerTeamColour.text);
+
+
         //Debug.Log("Player name: " + newPlayer.PlayerName);
         //Debug.Log("Player team: " + newPlayer.PlayerTeam);
         //Debug.Log("Player LobbyID: " + newPlayer.LobbyID);
         //Debug.Log("Player Token: " + newPlayer.Token);
-        //this.LobbyID = "1"; 
-        Debug.Log("Lobby ID is now: " + this.LobbyID);
-        //Join(newPlayer, "1");
-        Debug.Log("Player created in API");
+
+
+        //Debug.Log("Lobby ID is now: " + this.LobbyID);
+        //this.Join(newPlayer, LobbyID+1);
+        //Debug.Log("Player created in API");
         //int testlobbyid = 1;
         //string testplayername = "bob";
         //string testplayerteam = "blue";
