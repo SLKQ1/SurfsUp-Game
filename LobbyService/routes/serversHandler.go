@@ -6,6 +6,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+
+	"../serverutils"
 )
 
 // Represents a headless unity server
@@ -24,6 +26,8 @@ func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
 
 	if lobbyID > 0 && lobbyID <= len(lobbies) {
 		lobby := lobbies[lobbyID-1]
+		// Current hard coded condition to detected when a unity lobby is ready
+		// For now assume when the lobby is full we can create or get a server
 		if len(lobby.CurrentPlayers) == lobby.MaximumPlayers {
 
 			// Try getting the server based on the lobbyID
@@ -34,16 +38,17 @@ func getServerByLobbyID(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 
-			// Create a new server
+			// Create a new server as no server was found given the lobbyID
 			if unityServer == nil {
 
-				// TODO Launch a Headless Unity Server
+				port := serverutils.GeneratePort()
+				serverutils.LaunchServer(port)
 
 				unityServer = &server{
 					ID:        len(servers) + 1,
 					LobbyID:   lobbyID,
-					IPAddress: "0.0.0.0",
-					Port:      12345,
+					IPAddress: serverutils.ExternalIPAddr(),
+					Port:      port,
 				}
 
 				servers = append(servers, *unityServer)
