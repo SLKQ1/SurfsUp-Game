@@ -14,9 +14,9 @@ public class ButtonListControl : MonoBehaviour
     }
 
     // function to open lobby options when button is clicked 
-    public void ButtonClicked(string LobbyID)
+    public void ButtonClicked(int LobbyID)
     {
-
+        
         Debug.Log(LobbyID);
         // pass the lobby ID to joinLobby so that the player can join the lobby they clicked
         JoinLobby joinLobby = new JoinLobby(LobbyID);
@@ -39,7 +39,7 @@ public class ButtonListControl : MonoBehaviour
             button.SetActive(true);
 
             // setting button text to be the lobby id and if it is started or not
-            button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID.ToString(), "Lobby ID: " + LobbyList[i].ID + ", Is started: " + LobbyList[i].IsStarted);
+            button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID, "Lobby ID: " + LobbyList[i].ID + ", Is started: " + LobbyList[i].IsStarted);
             // setting button pos
             button.transform.SetParent(buttonTemplate.transform.parent, false);
         }
