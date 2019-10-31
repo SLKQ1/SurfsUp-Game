@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"os/exec"
+	"strconv"
 )
 
 const ConfigFile = "config.json"
@@ -21,4 +23,23 @@ func ReadConfig() Config {
 	readByte, _ := ioutil.ReadAll(configFile)
 	json.Unmarshal(readByte, &config)
 	return config
+}
+
+// LaunchServer() will launch a unity game server given a port to run it on
+func LaunchServer(port int) {
+	if PortInUse(port) {
+		panic("Attempting to Launch a Server on a port already in-use!")
+	}
+	config := ReadConfig()
+
+	// Run the unity game server on a tmux session
+	// tmux new-session -d -s <port_number> timeout <timeout> <executable> --port <port_number>
+	cmd := exec.Command("tmux", "new-session", "-d", "-s", strconv.Itoa(port),
+		"timeout", strconv.Itoa(config.Timeout), config.ExecutablePath, "--port", strconv.Itoa(port))
+
+	err := cmd.Run()
+	if err != nil {
+		panic(err)
+	}
+
 }
