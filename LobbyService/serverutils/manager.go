@@ -3,9 +3,11 @@ package serverutils
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"os/exec"
 	"strconv"
+	"strings"
 )
 
 const ConfigFile = "config.json"
@@ -15,7 +17,7 @@ type Config struct {
 	ExecutablePath string `json:"executablePath"` // The path to the headless server executable
 }
 
-// ReadConfig() will read the configuration file and return the appropraite
+// ReadConfig() will read the configuration file and return the appropriate
 // Config struct with the values unmarshalled.
 func ReadConfig() Config {
 	var config Config
@@ -41,5 +43,18 @@ func LaunchServer(port int) {
 	if err != nil {
 		panic(err)
 	}
+
+}
+
+// ExternalIPAddr() will get the external IP address of the current machine.
+func ExternalIPAddr() string {
+	// IP address are maximum 32 bytes
+	buffer := make([]byte, 32)
+	resp, err := http.Get("http://ipv4.icanhazip.com/")
+	if err != nil {
+		panic(err)
+	}
+	val, _ := resp.Body.Read(buffer)
+	return strings.TrimRight(string(buffer[:val]), "\r\n")
 
 }
