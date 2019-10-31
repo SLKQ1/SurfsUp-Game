@@ -18,4 +18,12 @@ public class JSONParser
         return LobbyList; 
     }
 
+    public ServerInfo GetIPAndPORT(int LobbyID)
+    {
+        var json = new WebClient().DownloadString(url + "/servers/" + LobbyID);
+        var ServerJson = JsonConvert.DeserializeObject<ServerInfo>(json);
+        return ServerJson;
+
+    }
+
 }
