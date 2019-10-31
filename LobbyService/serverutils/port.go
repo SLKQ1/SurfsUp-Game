@@ -8,10 +8,10 @@ import (
 // GeneratePort() generates a unused port number
 // which can be binded to by a server
 func GeneratePort() int {
-	// specifying port 0 is asking the Kernal to automatically bind to a unused port
+	// specifying port 0 is asking the Kernel to automatically bind to a unused port
 	listen, _ := net.Listen("tcp", ":0")
 	listen.Close()                           // Close listener
-	return listen.Addr().(*net.TCPAddr).Port // Return the port given by the Kernal
+	return listen.Addr().(*net.TCPAddr).Port // Return the port given by the Kernel
 }
 
 // PortInUse() returns whether or not a given port is already binded
