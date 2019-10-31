@@ -25,7 +25,7 @@ public class JoinLobby : MonoBehaviour
     public static PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
     {
         // temp hard code so that it works for the demo 
-        LobbyID = 2; 
+        LobbyID = 1; 
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
@@ -82,6 +82,8 @@ public class JoinLobby : MonoBehaviour
 
         // creates a new player      
         PlayerInfo newPlayer = CreatePlayer(this.LobbyID, PlayerName.text, PlayerTeamColour.text);
+        PortAndIP test = new PortAndIP();
+        test.Test(); 
 
 
         //Debug.Log("Player name: " + newPlayer.PlayerName);
