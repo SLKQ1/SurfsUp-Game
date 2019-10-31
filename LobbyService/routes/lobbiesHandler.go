@@ -29,13 +29,18 @@ func createLobby(w http.ResponseWriter, r *http.Request) {
 		var newLobby lobby
 		json.Unmarshal(reqBody, &newLobby)
 
-		newLobby.ID = len(lobbies) + 1    // automatically set the appropriate lobby ID
-		newLobby.Joinable = true          // a new lobby should be joinable
-		newLobby.CurrentPlayers = []int{} // a new lobby should have no players in it by default
+		// Make sure the Maximum Players in the lobby are atleast one.
+		if newLobby.MaximumPlayers > 0 {
+			newLobby.ID = len(lobbies) + 1    // automatically set the appropriate lobby ID
+			newLobby.Joinable = true          // a new lobby should be joinable
+			newLobby.CurrentPlayers = []int{} // a new lobby should have no players in it by default
 
-		lobbies = append(lobbies, newLobby)
-		w.WriteHeader(http.StatusCreated)
-		json.NewEncoder(w).Encode(newLobby)
+			lobbies = append(lobbies, newLobby)
+			w.WriteHeader(http.StatusCreated)
+			json.NewEncoder(w).Encode(newLobby)
+		} else {
+			w.WriteHeader(http.StatusForbidden)
+		}
 	} else {
 		w.WriteHeader(http.StatusPreconditionFailed)
 	}
