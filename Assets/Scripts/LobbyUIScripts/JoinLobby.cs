@@ -22,10 +22,11 @@ public class JoinLobby : MonoBehaviour
 
     // function to create a player by sending a post request to API
     // function then returns a new player of type PlayerInfo
-    public static PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
+    public PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
     {
-        // temp hard code so that it works for the demo 
-        LobbyID = 1; 
+        //// temp hard code so that it works for the demo 
+        //LobbyID = 1;
+        Debug.Log(LobbyID); 
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";

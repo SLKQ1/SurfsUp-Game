@@ -9,7 +9,7 @@ public class LobbyManager : MonoBehaviour
     // game objects for each screen on the menu
     public GameObject mainMenu;
     public GameObject lobbyListMenu;
-    public GameObject hostGameMenu;
+    public GameObject createLobbyMenu;
     public GameObject lobbyJoinMenu; 
 
     // Start is called before the first frame update
@@ -17,18 +17,19 @@ public class LobbyManager : MonoBehaviour
     {
         Instance = this;
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false); 
         DontDestroyOnLoad(gameObject); 
     }
 
     // host button
-    public void HostButton()
+    public void CreateLobbyButton()
     {
-        Debug.Log("Host");
-        hostGameMenu.SetActive(true);
+        Debug.Log("Create Lobby");
+        createLobbyMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
     }
 
     // button to display lobbies
@@ -46,7 +47,7 @@ public class LobbyManager : MonoBehaviour
         lobbyJoinMenu.SetActive(true); 
         mainMenu.SetActive(false);
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false); 
+        createLobbyMenu.SetActive(false); 
 
     }
 
@@ -55,7 +56,7 @@ public class LobbyManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
 
     }
