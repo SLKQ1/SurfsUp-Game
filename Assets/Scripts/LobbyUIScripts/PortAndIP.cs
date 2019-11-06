@@ -5,22 +5,28 @@ using System.Net;
 using Newtonsoft.Json;
 using Mirror;
 
+// class responsible for setting the port and Ip of the networked object 
 public class PortAndIP : MonoBehaviour
 {
-    public NetworkManager NetworkManagerScript; 
+    public NetworkManager NetworkManagerScript;
+    public TelepathyTransport TelepathyTransportScript; 
     // getting json for port and Ip
     public void Test()
     {
         int tempLobbyID = 1; 
         JSONParser PortIPParser = new JSONParser();
         ServerInfo Port_and_IP = PortIPParser.GetIPAndPORT(tempLobbyID);
-        Debug.Log(Port_and_IP.IPAddress);
-        Debug.Log(Port_and_IP.Port);
 
-        // getting the IP and port from the NetworkObject
-        var NetworkManagerScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<Transform>();
-        //NetworkManagerScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<NetworkManager>();
-        Debug.Log(NetworkManagerScript); 
+        // getting the IP and setting it from the NetworkManagerScript 
+        var NetworkManagerScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<NetworkManager>();
+        NetworkManagerScript.networkAddress = Port_and_IP.IPAddress; 
+        //Debug.Log(NetworkManagerScript.networkAddress);
+
+        // getting the port and setting it from the TelepathyTransport script
+        var TelepathyTransportScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<TelepathyTransport>();
+        TelepathyTransportScript.port = (ushort)Port_and_IP.Port; 
+        //Debug.Log(TelepathyTransportScript.port);
+
     }
 
 }
