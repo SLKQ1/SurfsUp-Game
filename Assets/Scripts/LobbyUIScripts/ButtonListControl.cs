@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;  
+using Newtonsoft.Json;
+using UnityEngine.UI; 
 public class ButtonListControl : MonoBehaviour
 {
     [SerializeField]
     private GameObject buttonTemplate;
+
+    public Text LobbyIDText;
+    public JoinLobby joinLobby; 
+
 
     private void Start()
     {
@@ -13,14 +18,11 @@ public class ButtonListControl : MonoBehaviour
 
     }
 
-    // function to open lobby options when button is clicked 
     public void ButtonClicked(int LobbyID)
     {
-        
-        Debug.Log(LobbyID);
-        // pass the lobby ID to joinLobby so that the player can join the lobby they clicked
-        JoinLobby joinLobby = new JoinLobby(LobbyID);
-        //joinLobby.Join(LobbyID);
+        // passing the lobby id to the Join lobby script so that it can set the text in canvas 
+        joinLobby = GameObject.FindObjectOfType<JoinLobby>();
+        joinLobby.SetLobbyID(LobbyID);
     }
 
     // function to generate buttons

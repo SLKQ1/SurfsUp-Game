@@ -44,7 +44,7 @@ public class LobbyManager : MonoBehaviour
     // button that is each lobby instance in lobbyListMenu
     public void LobbyInstanceButton()
     {
-        lobbyJoinMenu.SetActive(true); 
+        lobbyJoinMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyListMenu.SetActive(false);
         createLobbyMenu.SetActive(false); 

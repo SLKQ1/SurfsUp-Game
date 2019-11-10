@@ -10,14 +10,14 @@ public class JoinLobby : MonoBehaviour
 
     public InputField PlayerName;
     public InputField PlayerTeamColour;
-    public int LobbyID;
-    // private var to hold playerInfo var
-    //private PlayerInfo NewPlayer; 
+    [SerializeField]
+    private Text LobbyIDText;
+    private int lobbyID;  
 
-    public JoinLobby(int lobbyID)
+    public void SetLobbyID(int LobbyID)
     {
-        this.LobbyID = lobbyID;
-        Debug.Log("Lobby ID is now: " + LobbyID);
+        LobbyIDText.text = "LobbyID: " + LobbyID.ToString();
+        lobbyID = LobbyID; 
     }
 
     // function to create a player by sending a post request to API
@@ -26,7 +26,7 @@ public class JoinLobby : MonoBehaviour
     {
         //// temp hard code so that it works for the demo 
         //LobbyID = 1;
-        Debug.Log(LobbyID); 
+        //Debug.Log("hhhhhhhh"+LobbyID); 
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
@@ -66,15 +66,15 @@ public class JoinLobby : MonoBehaviour
 
 
     //    }
-        //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-        //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        //{
-        //    var result = streamReader.ReadToEnd();
-        //    // creating a player with the result
-        //    PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
-        //    return NewPlayer;
+    //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+    //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+    //{
+    //    var result = streamReader.ReadToEnd();
+    //    // creating a player with the result
+    //    PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
+    //    return NewPlayer;
 
-        //}
+    //}
 
     //}
 
@@ -82,9 +82,9 @@ public class JoinLobby : MonoBehaviour
     {
 
         // creates a new player      
-        PlayerInfo newPlayer = CreatePlayer(this.LobbyID, PlayerName.text, PlayerTeamColour.text);
+        PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
         PortAndIP test = new PortAndIP();
-        test.Test(); 
+        test.Test();
 
 
         //Debug.Log("Player name: " + newPlayer.PlayerName);
