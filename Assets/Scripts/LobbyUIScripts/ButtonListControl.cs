@@ -9,13 +9,19 @@ public class ButtonListControl : MonoBehaviour
     private GameObject buttonTemplate;
 
     public Text LobbyIDText;
-    public JoinLobby joinLobby; 
-
+    public JoinLobby joinLobby;
+    private GameObject[] gameObjects;
 
     private void Start()
     {
-        GenButtons(); 
+        GenButtons();
+        InvokeRepeating("DestroyAllButtons", 0f, 5f); 
 
+    }
+    private void Update()
+    {
+        DestroyAllButtons();
+        GenButtons();
     }
 
     public void ButtonClicked(int LobbyID)
@@ -31,13 +37,14 @@ public class ButtonListControl : MonoBehaviour
         // testing to see if lobbies show
         JSONParser LobbyParser = new JSONParser();
         List<LobbyInfo> LobbyList = LobbyParser.GetListLobbies();
-        Debug.Log("lobby: " + LobbyList[index: 0].ID);
+        //Debug.Log("lobby: " + LobbyList[index: 0].ID);
 
         // loop to create lobby buttons 
         for (int i = 0; i < LobbyList.Count; i++)
         {
             // making button and making visible
             GameObject button = Instantiate(buttonTemplate) as GameObject;
+            button.tag = "LobbyListButton"; 
             button.SetActive(true);
 
             // setting button text to be the lobby id and if it is started or not
@@ -46,7 +53,15 @@ public class ButtonListControl : MonoBehaviour
             button.transform.SetParent(buttonTemplate.transform.parent, false);
         }
 
-
     }
+    void DestroyAllButtons()
+    {
+        gameObjects = GameObject.FindGameObjectsWithTag("LobbyListButton");
 
+
+        for (var i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
+    }
 }
