@@ -66,15 +66,15 @@ public class JoinLobby : MonoBehaviour
 
 
     //    }
-    //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-    //using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-    //{
-    //    var result = streamReader.ReadToEnd();
-    //    // creating a player with the result
-    //    PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
-    //    return NewPlayer;
+    //    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+    //    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+    //    {
+    //        var result = streamReader.ReadToEnd();
+    //        // creating a player with the result
+    //        PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
+    //        return NewPlayer;
 
-    //}
+    //    }
 
     //}
 
@@ -82,25 +82,9 @@ public class JoinLobby : MonoBehaviour
     {
 
         // creates a new player      
-        PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
+        CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
         PortAndIP test = new PortAndIP();
         test.Test();
-
-
-        //Debug.Log("Player name: " + newPlayer.PlayerName);
-        //Debug.Log("Player team: " + newPlayer.PlayerTeam);
-        //Debug.Log("Player LobbyID: " + newPlayer.LobbyID);
-        //Debug.Log("Player Token: " + newPlayer.Token);
-
-
-        //Debug.Log("Lobby ID is now: " + this.LobbyID);
-        //this.Join(newPlayer, LobbyID+1);
-        //Debug.Log("Player created in API");
-        //int testlobbyid = 1;
-        //string testplayername = "bob";
-        //string testplayerteam = "blue";
-        //string testplayertoken = "123"; 
-        //Debug.Log("{\"LobbyID\":" + testlobbyid + "," + "\"PlayerName\":" + "\"" + testplayername + "\"," + "\"PlayerTeam\":" + "\"" + testplayerteam + "\"," + "\"Token\":" + "\"" + testplayertoken + "\"" + "}");
     }
 
 
