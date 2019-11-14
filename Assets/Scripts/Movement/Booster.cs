@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fragsurf.Movement;
 
 public class Booster : MonoBehaviour
 {
     /// Force impulse depends on rigit body mass
-    public float impulseForce = 100f;
+    [SerializeField]
+    float velocityMultiplier = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,26 +21,19 @@ public class Booster : MonoBehaviour
         
     }
 
-    void OnTriggerEnter( Collider collider )
+    void OnTriggerEnter( Collider other )
     {
-        Debug.Log("Collision: " + collider.gameObject );
+        GameObject player = other.transform.parent.gameObject;
+        Quaternion playerRotation = player.GetComponent<Transform>().rotation;
+        SurfCharacter surfCharacter = player.GetComponent<SurfCharacter>();
+        if (surfCharacter != null)
+        {
+            //surfCharacter.ResetPosition();
+            surfCharacter.moveData.velocity *= velocityMultiplier;
+        }
+    }
 
-        Rigidbody body = gameObject.GetComponent<Rigidbody>();
-
-        // TODO: this is very dangerous, keep collider & rigit body consistant on the same level to avoid parent / child scanning
-
-        if( body != null ) {}
-
-        else if( collider.gameObject.GetComponentInParent<Rigidbody>() )
-            body = collider.gameObject.GetComponentInParent<Rigidbody>();
-
-        else if( collider.gameObject.GetComponentInChildren<Rigidbody>() )
-            body = collider.gameObject.GetComponentInChildren<Rigidbody>();
-
-        else body = null;
-
-        Debug.Log("Body: " + body );
-
-        body?.AddForce( transform.forward * impulseForce * Time.deltaTime, ForceMode.Impulse );
+    private void OnTriggerStay(Collider other)
+    {
     }
 }
