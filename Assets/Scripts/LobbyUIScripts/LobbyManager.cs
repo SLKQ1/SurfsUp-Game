@@ -7,6 +7,7 @@ public class LobbyManager : MonoBehaviour
     public static LobbyManager Instance { set; get; }
 
     // game objects for each screen on the menu
+    //public GameObject createPlayerMenu; 
     public GameObject mainMenu;
     public GameObject lobbyListMenu;
     public GameObject createLobbyMenu;
@@ -16,6 +17,8 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        //createPlayerMenu.SetActive(true);
+        mainMenu.SetActive(true); 
         lobbyListMenu.SetActive(false);
         createLobbyMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false); 
