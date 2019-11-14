@@ -25,5 +25,11 @@ public class JSONParser
         return ServerJson;
 
     }
+    public PlayerInfo GetPlayer(int playerID)
+    {
+        var json = new WebClient().DownloadString(url + "/players/" + playerID);
+        var playerJson = JsonConvert.DeserializeObject<PlayerInfo>(json);
+        return playerJson; 
+    }
 
 }
