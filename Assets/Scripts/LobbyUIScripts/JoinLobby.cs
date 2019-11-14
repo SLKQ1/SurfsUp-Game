@@ -86,13 +86,15 @@ public class JoinLobby : MonoBehaviour
     {
 
         //// creates a new player      
-        //CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
+        PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
+        string playerToken = newPlayer.Token; 
         //PortAndIP test = new PortAndIP();
         //test.Set_Port_and_IP(this.lobbyID);
 
-        //// passing the lobby id to in lobby script
+        // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
         inLobby.SetLobbyID(lobbyID);
+        inLobby.SetToken(playerToken); 
 
     }
 
