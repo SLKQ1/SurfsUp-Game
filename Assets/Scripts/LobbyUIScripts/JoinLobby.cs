@@ -84,7 +84,7 @@ public class JoinLobby : MonoBehaviour
         // creates a new player      
         CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
         PortAndIP test = new PortAndIP();
-        test.Test();
+        test.Set_Port_and_IP();
     }
 
 

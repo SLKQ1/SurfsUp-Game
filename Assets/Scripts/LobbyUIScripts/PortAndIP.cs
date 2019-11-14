@@ -11,7 +11,7 @@ public class PortAndIP : MonoBehaviour
     public NetworkManager NetworkManagerScript;
     public TelepathyTransport TelepathyTransportScript; 
     // getting json for port and Ip
-    public void Test()
+    public void Set_Port_and_IP()
     {
         int tempLobbyID = 1; 
         JSONParser PortIPParser = new JSONParser();
