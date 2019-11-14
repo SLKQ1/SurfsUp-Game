@@ -11,7 +11,8 @@ public class LobbyManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject lobbyListMenu;
     public GameObject createLobbyMenu;
-    public GameObject lobbyJoinMenu; 
+    public GameObject lobbyJoinMenu;
+    public GameObject inLobbyMenu; 
 
     // Start is called before the first frame update
     private void Start()
@@ -21,7 +22,8 @@ public class LobbyManager : MonoBehaviour
         mainMenu.SetActive(true); 
         lobbyListMenu.SetActive(false);
         createLobbyMenu.SetActive(false);
-        lobbyJoinMenu.SetActive(false); 
+        lobbyJoinMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
         DontDestroyOnLoad(gameObject); 
     }
 
@@ -53,6 +55,16 @@ public class LobbyManager : MonoBehaviour
         createLobbyMenu.SetActive(false); 
 
     }
+    // button to switch to in lobby canvas
+    public void InLobbyCanvasButton()
+    {
+        mainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        lobbyJoinMenu.SetActive(false);
+        inLobbyMenu.SetActive(true); 
+
+    }
 
     // backbutton
     public void BackButton()
@@ -63,6 +75,8 @@ public class LobbyManager : MonoBehaviour
         lobbyJoinMenu.SetActive(false);
 
     }
+
+
 
 
 }

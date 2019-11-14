@@ -11,21 +11,21 @@ public class PortAndIP : MonoBehaviour
     public NetworkManager NetworkManagerScript;
     public TelepathyTransport TelepathyTransportScript; 
     // getting json for port and Ip
-    public void Set_Port_and_IP()
+    public void Set_Port_and_IP(int LobbyID)
     {
-        int tempLobbyID = 1; 
+
         JSONParser PortIPParser = new JSONParser();
-        ServerInfo Port_and_IP = PortIPParser.GetIPAndPORT(tempLobbyID);
+        ServerInfo Port_and_IP = PortIPParser.GetIPAndPORT(LobbyID);
 
         // getting the IP and setting it from the NetworkManagerScript 
         var NetworkManagerScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<NetworkManager>();
         NetworkManagerScript.networkAddress = Port_and_IP.IPAddress;
-        //Debug.Log(NetworkManagerScript.networkAddress);
+        Debug.Log(NetworkManagerScript.networkAddress);
 
         // getting the port and setting it from the TelepathyTransport script
         var TelepathyTransportScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<TelepathyTransport>();
         TelepathyTransportScript.port = (ushort)Port_and_IP.Port;
-        //Debug.Log(TelepathyTransportScript.port);
+        Debug.Log(TelepathyTransportScript.port);
 
     }
 

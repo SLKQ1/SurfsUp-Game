@@ -12,12 +12,16 @@ public class JoinLobby : MonoBehaviour
     public InputField PlayerTeamColour;
     [SerializeField]
     private Text LobbyIDText;
-    private int lobbyID;  
+    private int lobbyID;
+    //// ref to in lobby canvas
+    public InLobby inLobby;
+
 
     public void SetLobbyID(int LobbyID)
     {
         LobbyIDText.text = "LobbyID: " + LobbyID.ToString();
-        lobbyID = LobbyID; 
+        lobbyID = LobbyID;
+
     }
 
     // function to create a player by sending a post request to API
@@ -81,10 +85,15 @@ public class JoinLobby : MonoBehaviour
     public void OnClick()
     {
 
-        // creates a new player      
-        CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
-        PortAndIP test = new PortAndIP();
-        test.Set_Port_and_IP();
+        //// creates a new player      
+        //CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
+        //PortAndIP test = new PortAndIP();
+        //test.Set_Port_and_IP(this.lobbyID);
+
+        //// passing the lobby id to in lobby script
+        inLobby = GameObject.FindObjectOfType<InLobby>();
+        inLobby.SetLobbyID(lobbyID);
+
     }
 
 
