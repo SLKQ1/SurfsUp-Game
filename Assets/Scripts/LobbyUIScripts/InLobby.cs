@@ -10,6 +10,9 @@ public class InLobby : MonoBehaviour
     [SerializeField]
     private Text LobbyIDText;
     private int lobbyID;
+    // var to store players token
+    private string token; 
+
     //Start is called before the first frame update
 
     //void Start()
@@ -27,9 +30,12 @@ public class InLobby : MonoBehaviour
         for (int i = 0; i < curPlayers.Length; i++)
         {
             string curPlayerName = GetPlayer(curPlayers[i]).PlayerName;
-            bool curPlayerStatus = GetPlayer(curPlayers[i]).PlayerReady; 
-            curPlayersText.text += curPlayerName + " " + curPlayerStatus + "\n"; 
+            string curPlayerTeam = GetPlayer(curPlayers[i]).PlayerTeam;
+            bool curPlayerStatus = GetPlayer(curPlayers[i]).PlayerReady;
+            curPlayersText.text += curPlayerName + " " + curPlayerTeam +" " + curPlayerStatus + "\n"; 
         }
+
+        Debug.Log(token); 
 
 
     }
@@ -40,10 +46,15 @@ public class InLobby : MonoBehaviour
         lobbyID = LobbyID;
     }
 
+    public void SetToken(string playerToken)
+    {
+        token = playerToken;
+    }
+
     private LobbyInfo GetLobby(int LobbyID)
     {
         JSONParser JSONParser = new JSONParser();
-        LobbyInfo curLobby = JSONParser.GetLobby(lobbyID);
+        LobbyInfo curLobby = JSONParser.GetLobby(LobbyID);
         return curLobby; 
     }
 
@@ -52,5 +63,10 @@ public class InLobby : MonoBehaviour
         JSONParser JSONParser = new JSONParser();
         PlayerInfo curPlayer = JSONParser.GetPlayer(playerID);
         return curPlayer; 
+    }
+
+    private void PatchReadyStatus()
+    {
+
     }
 }
