@@ -66,7 +66,10 @@ namespace Fragsurf.Movement {
 
         public MoveType moveType { get { return MoveType.Walk; } }
         public MovementConfig moveConfig { get { return movementConfig; } }
-        public MoveData moveData { get { return _moveData; } }
+        public MoveData moveData {
+            get { return _moveData; }
+            set { _moveData = value; }
+        }
         public new Collider collider { get { return _collider; } }
 
         public GameObject groundObject {
@@ -251,7 +254,7 @@ namespace Fragsurf.Movement {
 
         }
 
-        private void ResetPosition () {
+        public void ResetPosition () {
             
             moveData.velocity = Vector3.zero;
             moveData.origin = _startPosition;
