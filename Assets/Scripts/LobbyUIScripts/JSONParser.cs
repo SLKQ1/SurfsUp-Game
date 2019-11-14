@@ -32,4 +32,12 @@ public class JSONParser
         return playerJson; 
     }
 
+    public LobbyInfo GetLobby(int LobbyID)
+    {
+        var json = new WebClient().DownloadString(url + "/lobbies/" + LobbyID);
+        var lobbyJson = JsonConvert.DeserializeObject<LobbyInfo>(json);
+        return lobbyJson;
+
+    }
+
 }

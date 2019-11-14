@@ -12,8 +12,6 @@ public class ButtonListControl : MonoBehaviour
     // ref to join lobby canvas
     public JoinLobby joinLobby;
     private GameObject[] gameObjects;
-    // ref to in lobby canvas
-    //public InLobby inLobby; 
 
     private void Start()
     {
@@ -32,11 +30,6 @@ public class ButtonListControl : MonoBehaviour
         // passing the lobby id to the Join lobby script so that it can set the text in canvas 
         joinLobby = GameObject.FindObjectOfType<JoinLobby>();
         joinLobby.SetLobbyID(LobbyID);
-
-        //inLobby = GameObject.FindObjectOfType<InLobby>();
-        //inLobby.SetLobbyID(LobbyID);
-
-
 
     }
 
