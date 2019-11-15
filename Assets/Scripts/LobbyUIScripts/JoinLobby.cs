@@ -13,7 +13,7 @@ public class JoinLobby : MonoBehaviour
     [SerializeField]
     private Text LobbyIDText;
     private int lobbyID;
-    //// ref to in lobby canvas
+    // ref to in lobby canvas
     public InLobby inLobby;
 
 
@@ -87,14 +87,15 @@ public class JoinLobby : MonoBehaviour
 
         //// creates a new player      
         PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
-        string playerToken = newPlayer.Token; 
+        string playerToken = newPlayer.Token;
         //PortAndIP test = new PortAndIP();
         //test.Set_Port_and_IP(this.lobbyID);
 
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
         inLobby.SetLobbyID(lobbyID);
-        inLobby.SetToken(playerToken); 
+        inLobby.SetToken(playerToken);
+        inLobby.SetPlayerID(newPlayer.ID); 
 
     }
 
