@@ -35,6 +35,7 @@ public class LobbyManager : MonoBehaviour
         mainMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
         lobbyListMenu.SetActive(false);
+        inLobbyMenu.SetActive(false); 
     }
 
     // button to display lobbies
@@ -44,6 +45,9 @@ public class LobbyManager : MonoBehaviour
         lobbyListMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+
     }
 
     // button that is each lobby instance in lobbyListMenu
