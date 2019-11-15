@@ -3,22 +3,18 @@ guid: e22ac690fddecfa469785d5123f03eda
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: BezierCurve
-    100004: Camera
-    100006: Circle
-    100008: Cylinder
-    100010: Cylinder.001
-    100012: Cylinder.002
-    400000: //RootNode
-    400002: BezierCurve
-    400004: Camera
-    400006: Circle
-    400008: Cylinder
-    400010: Cylinder.001
-    400012: Cylinder.002
-    2000000: //RootNode
-    2000002: Camera
+    100000: BezierCurve
+    100002: Circle
+    100004: Cylinder
+    100006: Cylinder.001
+    100008: Cylinder.002
+    100010: //RootNode
+    400000: BezierCurve
+    400002: Circle
+    400004: Cylinder
+    400006: Cylinder.001
+    400008: Cylinder.002
+    400010: //RootNode
     2100000: Material.001
     2300000: BezierCurve
     2300002: Circle
