@@ -14,16 +14,20 @@ public class PlayerInfo
     //	PlayerTeam string `json:"PlayerTeam"`  // The team name or team color the player is currently on.
     //	PlayerReady bool   `json:"PlayerReady"` // Whether or not the player is ready to play whilst in a lobby.
     //}
-    public int ID;
-    public string Token;
-    public int LobbyID;
-    public string PlayerName;
-    public string PlayerTeam;
-    public bool PlayerReady;
+    public int ID { get; set; }
+    public string Token { get; set; }
+    public int LobbyID { get; set; }
+    public string PlayerName { get; set; }
+    public string PlayerTeam { get; set; }
+    public bool PlayerReady { get; set; }
 
     public static PlayerInfo CreateFromJSON(string jsonString)
     {
         return JsonConvert.DeserializeObject<PlayerInfo>(jsonString);
+    }
+    public static string CreateJSON(PlayerInfo cur_player)
+    {
+        return JsonConvert.SerializeObject(cur_player); 
     }
 
 }
