@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -15,11 +16,10 @@ public class InLobby : MonoBehaviour
     [SerializeField]
     private Text LobbyIDText;
     private int lobbyID;
-    // var to store player id
-    private int playerID; 
-    // var to store players token
-    private string token;
-    public GameObject inLobbyCanvas; 
+
+    public GameObject inLobbyCanvas;
+    // var to store player info
+    private PlayerInfo currentPlayer; 
 
     //Start is called before the first frame update
 
@@ -57,13 +57,9 @@ public class InLobby : MonoBehaviour
         lobbyID = LobbyID;
     }
 
-    public void SetToken(string playerToken)
+    public void SetPlayer(PlayerInfo cur_Player)
     {
-        token = playerToken;
-    }
-    public void SetPlayerID(int PlayerID)
-    {
-        playerID = PlayerID;
+        currentPlayer = cur_Player; 
     }
 
     private LobbyInfo GetLobby(int LobbyID)
@@ -73,14 +69,14 @@ public class InLobby : MonoBehaviour
         return curLobby; 
     }
 
-    private PlayerInfo GetPlayer(int playerID)
+    private PlayerInfo GetPlayer(int player_ID)
     {
         JSONParser JSONParser = new JSONParser();
-        PlayerInfo curPlayer = JSONParser.GetPlayer(playerID);
+        PlayerInfo curPlayer = JSONParser.GetPlayer(player_ID);
         return curPlayer; 
     }
 
-    public void PatchReadyStatus(int playerID, string playerName, string playerTeam, bool playerReady)
+    public void PatchReadyStatus(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
     {
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/" + playerID);
         httpWebRequest.ContentType = "application/json";
@@ -88,16 +84,22 @@ public class InLobby : MonoBehaviour
 
         using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
         {
-            //{ "ID":17,"Token":"bn6qlh0lqqbcc5tr7tm0","LobbyID":3,"PlayerName":"Faiz","PlayerTeam":"red","PlayerReady":true}   
-            //Debug.Log("{\"Token\":" + "\"" + token + ",\"" + "LobbyID\":" + lobbyID + ",\"" + "PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "PlayerReady\":" + (!playerReady).ToString().ToLower() + "}");
-            Debug.Log("{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + (!playerReady).ToString().ToLower() + "}");
-            string json = "{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + (!playerReady).ToString().ToLower() + "}";
+            curPlayer.PlayerReady.Equals(true);
+            string json = PlayerInfo.CreateJSON(curPlayer);
+
+            Debug.Log(json);
+
+            //Debug.Log("{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + (!playerReady).ToString().ToLower() + "}");
+            //string json = "{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + true + "}";
+            //string json = "{\"LobbyID\":" + 1 + "," + "\"PlayerName\":" + "\"" + "" + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + true + "}";
             streamWriter.Write(json);
         }
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        //Debug.Log(httpResponse); 
         using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
         {
             var result = streamReader.ReadToEnd();
+            Debug.Log(result); 
             // creating a player with the result
             PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
             //return NewPlayer;
@@ -110,17 +112,10 @@ public class InLobby : MonoBehaviour
 
     public void OnClick()
     {
-        // getting cur player 
-        int[] curPlayers = GetLobby(lobbyID).CurrentPlayers;
-        int index = 0;
-        for (int i = 0; i < curPlayers.Length; i++)
-        {
-            if (curPlayers[i] == playerID)
-            {
-                index = i; 
-            }
-        }
-        PlayerInfo curPlayer = GetPlayer(curPlayers[index]);
-        PatchReadyStatus(playerID, curPlayer.PlayerName, curPlayer.PlayerTeam, curPlayer.PlayerReady); 
+        string name = this.currentPlayer.PlayerName;
+        string team = this.currentPlayer.PlayerTeam;
+        int id = this.currentPlayer.ID;
+        bool isReady = this.currentPlayer.PlayerReady; 
+        PatchReadyStatus(id, name, team, isReady, this.currentPlayer); 
     }
 }

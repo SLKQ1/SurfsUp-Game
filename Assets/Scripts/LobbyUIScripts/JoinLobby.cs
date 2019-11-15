@@ -28,18 +28,28 @@ public class JoinLobby : MonoBehaviour
     // function then returns a new player of type PlayerInfo
     public PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
     {
-        //// temp hard code so that it works for the demo 
-        //LobbyID = 1;
-        //Debug.Log("hhhhhhhh"+LobbyID); 
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 
         using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
         {
+            PlayerInfo newPlayer = new PlayerInfo
+            {
+                LobbyID = lobbyID,
+                PlayerName = PlayerName,
+                PlayerTeam = PlayerTeam,
+                PlayerReady = true
+            };
+
+            string json = PlayerInfo.CreateJSON(newPlayer);
+
+            Debug.Log(json);
+
             //'{"PlayerName": "Player 1", "PlayerTeam": "Green"}'
-            //Debug.Log("{\"LobbyID\":" + LobbyID +  ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}");
-            string json = "{\"LobbyID\":" + LobbyID + ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}";
+            //Debug.Log("{\"LobbyID\":" + LobbyID + ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}");
+            //string json = "{\"LobbyID\":" + LobbyID + ",\"" + "PlayerName\":" + "\"" + PlayerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + PlayerTeam + "\"" + "}";
+
             streamWriter.Write(json); 
         }
         var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -87,15 +97,13 @@ public class JoinLobby : MonoBehaviour
 
         //// creates a new player      
         PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
-        string playerToken = newPlayer.Token;
         //PortAndIP test = new PortAndIP();
         //test.Set_Port_and_IP(this.lobbyID);
 
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
         inLobby.SetLobbyID(lobbyID);
-        inLobby.SetToken(playerToken);
-        inLobby.SetPlayerID(newPlayer.ID); 
+        inLobby.SetPlayer(newPlayer); 
 
     }
 
