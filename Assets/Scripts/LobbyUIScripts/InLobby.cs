@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -76,34 +77,23 @@ public class InLobby : MonoBehaviour
         return curPlayer; 
     }
 
-    public void PatchReadyStatus(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
+    public async Task PatchReadyStatusAsync(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
     {
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/" + playerID);
-        httpWebRequest.ContentType = "application/json";
-        httpWebRequest.Method = "PATCH X";
 
-        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+        using (var httpClient = new HttpClient())
         {
-            curPlayer.PlayerReady.Equals(true);
-            string json = PlayerInfo.CreateJSON(curPlayer);
+            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://lobbyservice.mooo.com:8080/players/" + playerID))
+            {
+                // setting the player ready status to true 
+                curPlayer.PlayerReady = !curPlayer.PlayerReady;
+                string json = PlayerInfo.CreateJSON(curPlayer);
+                Debug.Log(json); 
 
-            Debug.Log(json);
+                request.Content = new StringContent(json);
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-            //Debug.Log("{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + (!playerReady).ToString().ToLower() + "}");
-            //string json = "{\"LobbyID\":" + lobbyID + "," + "\"PlayerName\":" + "\"" + playerName + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + true + "}";
-            //string json = "{\"LobbyID\":" + 1 + "," + "\"PlayerName\":" + "\"" + "" + "\"" + "," + "\"PlayerTeam\":" + "\"" + playerTeam + "\"" + "," + "\"Token\":" + "\"" + token + "\"" + "," + "\"PlayerReady\":" + true + "}";
-            streamWriter.Write(json);
-        }
-        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-        //Debug.Log(httpResponse); 
-        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        {
-            var result = streamReader.ReadToEnd();
-            Debug.Log(result); 
-            // creating a player with the result
-            PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
-            //return NewPlayer;
-
+                var response = await httpClient.SendAsync(request);
+            }
         }
 
 
@@ -116,6 +106,6 @@ public class InLobby : MonoBehaviour
         string team = this.currentPlayer.PlayerTeam;
         int id = this.currentPlayer.ID;
         bool isReady = this.currentPlayer.PlayerReady; 
-        PatchReadyStatus(id, name, team, isReady, this.currentPlayer); 
+        PatchReadyStatusAsync(id, name, team, isReady, this.currentPlayer); 
     }
 }

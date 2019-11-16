@@ -39,7 +39,7 @@ public class JoinLobby : MonoBehaviour
                 LobbyID = lobbyID,
                 PlayerName = PlayerName,
                 PlayerTeam = PlayerTeam,
-                PlayerReady = true
+                //PlayerReady = true
             };
 
             string json = PlayerInfo.CreateJSON(newPlayer);
