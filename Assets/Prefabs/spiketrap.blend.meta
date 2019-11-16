@@ -98,6 +98,23 @@ ModelImporter:
     4300028: Cone.013
     4300030: Cone.014
     4300032: Cone.015
+    6400000: Cone
+    6400002: Cone.001
+    6400004: Cone.002
+    6400006: Cone.003
+    6400008: Cone.004
+    6400010: Cone.005
+    6400012: Cone.006
+    6400014: Cone.007
+    6400016: Cone.008
+    6400018: Cone.009
+    6400020: Cone.010
+    6400022: Cone.011
+    6400024: Cone.012
+    6400026: Cone.013
+    6400028: Cone.014
+    6400030: Cone.015
+    6400032: Cube
     10800000: Light
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -131,9 +148,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.5
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
