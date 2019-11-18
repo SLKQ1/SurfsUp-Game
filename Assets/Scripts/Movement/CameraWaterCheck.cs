@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class CameraWaterCheck : MonoBehaviour {
+public class CameraWaterCheck : NetworkBehaviour {
     
     private List<Collider> triggers = new List<Collider> ();
 

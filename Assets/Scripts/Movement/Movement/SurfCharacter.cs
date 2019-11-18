@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using Mirror;
 
 namespace Fragsurf.Movement {
 
@@ -9,15 +10,17 @@ namespace Fragsurf.Movement {
     /// Easily add a surfable character to the scene
     /// </summary>
     [AddComponentMenu ("Fragsurf/Surf Character")]
-    public class SurfCharacter : MonoBehaviour, ISurfControllable {
+    public class SurfCharacter : NetworkBehaviour, ISurfControllable {
 
         public enum ColliderType {
             Capsule,
             Box
         }
 
-        ///// Fields /////
+        [SerializeField]
+        private Camera m_camera;
 
+        ///// Fields /////
         [Header("Physics Settings")]
         public Vector3 colliderSize = new Vector3 (1f, 2f, 1f);
         public ColliderType collisionType;
@@ -100,6 +103,12 @@ namespace Fragsurf.Movement {
 
             }
 
+        }
+
+        override public void OnStartLocalPlayer()
+        {
+            Debug.Log("Enabling Camera");
+            m_camera.enabled = true;
         }
 
         private void Start () {
@@ -201,6 +210,10 @@ namespace Fragsurf.Movement {
         }
 
         private void Update () {
+            //Debug.Log("ID: "+netId+" hasAuthority: "+hasAuthority);
+            if (!isLocalPlayer)
+                return;
+            //Debug.Log("ID: " + netId + " is local player");
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
@@ -240,13 +253,14 @@ namespace Fragsurf.Movement {
 
             _controller.ProcessMovement (this, movementConfig, Time.deltaTime);
 
+            Debug.Log("updating position for:" + netId);
             transform.position = moveData.origin;
             prevPosition = transform.position;
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
         }
-        
+
         private void UpdateTestBinds () {
 
             if (Input.GetKeyDown (KeyCode.Backspace))
