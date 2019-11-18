@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TeleportPlayer : MonoBehaviour
+public class TeleportPlayer : NetworkBehaviour  
 {
 	[SerializeField]
 	private Vector3 spawnCoords = new Vector3(-12,104,0);
