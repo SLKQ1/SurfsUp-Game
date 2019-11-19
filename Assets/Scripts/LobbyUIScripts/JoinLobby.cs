@@ -102,7 +102,7 @@ public class JoinLobby : MonoBehaviour
 
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
-        inLobby.SetLobbyID(lobbyID);
+        inLobby.SetLobby(lobbyID);
         inLobby.SetPlayer(newPlayer); 
 
     }

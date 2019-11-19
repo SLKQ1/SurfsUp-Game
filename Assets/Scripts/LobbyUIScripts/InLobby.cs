@@ -20,17 +20,27 @@ public class InLobby : MonoBehaviour
 
     public GameObject inLobbyCanvas;
     // var to store player info
-    private PlayerInfo currentPlayer; 
-
+    private PlayerInfo currentPlayer;
+    // var to store player id array to minimize API calls
+    private int[] curPlayers;
+    // var to store lobby inorder to minimize API calls
+    LobbyInfo curLobby; 
     //Start is called before the first frame update
 
     void Start()
     {
-        InvokeRepeating("UpdateCurrentPlayers", 0f, 5f);
+        InvokeRepeating("UpdateCurrentPlayers", 0f, 1f);
 
     }
+    private void Update()
+    {
+        if (AllPlayersReady())
+        {
+            Set_Port_and_IP(this.lobbyID); 
+        }
+    }
 
-    //Update is called once per frame
+    // method to update the current players in the lobby
     public void UpdateCurrentPlayers()
     {
         curPlayersText.text = "\n"; 
@@ -38,13 +48,14 @@ public class InLobby : MonoBehaviour
         if (lobbyID != 0)
         {
             // update if new player has joined, ready status of a player has changed
-            int[] curPlayers = GetLobby(lobbyID).CurrentPlayers;
+            this.curPlayers = GetLobby(lobbyID).CurrentPlayers;
 
             for (int i = 0; i < curPlayers.Length; i++)
             {
-                string curPlayerName = GetPlayer(curPlayers[i]).PlayerName;
-                string curPlayerTeam = GetPlayer(curPlayers[i]).PlayerTeam;
-                bool curPlayerStatus = GetPlayer(curPlayers[i]).PlayerReady;
+                PlayerInfo player = GetPlayer(curPlayers[i]); 
+                string curPlayerName = player.PlayerName;
+                string curPlayerTeam = player.PlayerTeam;
+                bool curPlayerStatus = player.PlayerReady;
                 curPlayersText.text += curPlayerName + " " + curPlayerTeam + " " + curPlayerStatus + "\n";
             }
 
@@ -52,24 +63,33 @@ public class InLobby : MonoBehaviour
 
     }
 
-    public void SetLobbyID(int LobbyID)
+    // method to set lobby text and all feilds that require the lobby
+    public void SetLobby(int LobbyID)
     {
         LobbyIDText.text = "LobbyID: " + LobbyID.ToString();
         lobbyID = LobbyID;
+        // setting curlobby field 
+        this.curLobby = GetLobby(this.lobbyID);
+        // getting the current players in lobby 
+        this.curPlayers = GetLobby(lobbyID).CurrentPlayers;
+
     }
 
+    // method to set player
     public void SetPlayer(PlayerInfo cur_Player)
     {
-        currentPlayer = cur_Player; 
+        this.currentPlayer = cur_Player;
     }
 
+    // method to get the current lobby from the API
     private LobbyInfo GetLobby(int LobbyID)
     {
         JSONParser JSONParser = new JSONParser();
-        LobbyInfo curLobby = JSONParser.GetLobby(LobbyID);
+        this.curLobby = JSONParser.GetLobby(LobbyID);
         return curLobby; 
     }
 
+    // method to get the current player from the API
     private PlayerInfo GetPlayer(int player_ID)
     {
         JSONParser JSONParser = new JSONParser();
@@ -77,7 +97,8 @@ public class InLobby : MonoBehaviour
         return curPlayer; 
     }
 
-    public async Task PatchReadyStatusAsync(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
+    // method to patch players ready status 
+    private async Task PatchReadyStatusAsync(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
     {
 
         using (var httpClient = new HttpClient())
@@ -97,6 +118,37 @@ public class InLobby : MonoBehaviour
         }
 
 
+    }
+
+    // method to check if all players are ready 
+    private bool AllPlayersReady()
+    {
+        // if all players are ready 
+        if (curPlayers.Length == curLobby.MaximumPlayers)
+        {
+            int count = 0;
+            for (int i = 0; i < curPlayers.Length; i++)
+            {
+                if (GetPlayer(curPlayers[i]).PlayerReady)
+                {
+                    count++;
+                }
+            }
+            if (count == curLobby.MaximumPlayers)
+            {
+                return true; 
+            }
+
+        }
+        return false; 
+
+    }
+
+    // method to set the port and IP
+    private void Set_Port_and_IP(int LobbyID)
+    {
+        PortAndIP port_and_ip = new PortAndIP();
+        port_and_ip.Set_Port_and_IP(LobbyID); 
     }
 
 
