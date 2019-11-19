@@ -2454,6 +2454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52eadbd98d414d45843afa7a6945aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   velocityMultiplier: 2
 --- !u!65 &381170109
 BoxCollider:
@@ -37842,8 +37844,8 @@ GameObject:
   - component: {fileID: 1045071143}
   - component: {fileID: 1045071142}
   - component: {fileID: 1045071141}
-  - component: {fileID: 1045071146}
   - component: {fileID: 1045071140}
+  - component: {fileID: 1045071146}
   m_Layer: 0
   m_Name: RespawnPlatfrom
   m_TagString: Untagged
@@ -38233,10 +38235,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1045071139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1194e867148f40cda413f1fa7351276, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f6312e99a3bb4b429eb8ee59b0b1656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCoords: {x: -12, y: 104, z: 0}
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &1062400514
 GameObject:
   m_ObjectHideFlags: 0
@@ -78198,6 +78201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1194e867148f40cda413f1fa7351276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   spawnCoords: {x: -12, y: 144, z: 0}
 --- !u!65 &2036722034
 BoxCollider:
@@ -78277,7 +78282,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh11844
+  m_Name: pb_Mesh14324
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2

@@ -20,6 +20,10 @@ namespace Fragsurf.Movement {
         [SerializeField]
         private Camera m_camera;
 
+        [Header("Lives")]
+        [SerializeField]
+        private int lives = 3;
+
         ///// Fields /////
         [Header("Physics Settings")]
         public Vector3 colliderSize = new Vector3 (1f, 2f, 1f);
@@ -264,15 +268,21 @@ namespace Fragsurf.Movement {
         private void UpdateTestBinds () {
 
             if (Input.GetKeyDown (KeyCode.Backspace))
-                ResetPosition ();
+                Death ();
 
         }
 
-        public void ResetPosition () {
-            
-            moveData.velocity = Vector3.zero;
-            moveData.origin = _startPosition;
-
+        public void Death () {
+            if (lives > 0)
+            {
+                moveData.velocity = Vector3.zero;
+                moveData.origin = _startPosition;
+            }else
+            {
+                // tp to spectating area
+                Debug.Log("TODO");
+            }
+            lives--;
         }
 
         private void UpdateMoveData () {

@@ -32,9 +32,12 @@ public class PlayerAiming : NetworkBehaviour {
     // Sway
     [HideInInspector] public float sway = 0f;
 
+    private bool lockMouse = false;
+
     void Start () {
-        
+
         // Lock the mouse
+        lockMouse = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -45,6 +48,23 @@ public class PlayerAiming : NetworkBehaviour {
         if (!identity.isLocalPlayer)
             return;
         Debug.Log("ID: " + identity.netId + " is local player");
+
+        if (Input.GetButtonDown("unlock_mouse"))
+        {
+            Debug.Log("escape pressed");
+
+            // Lock the mouse
+            lockMouse = !lockMouse;
+            if (lockMouse)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            Cursor.visible = !Cursor.visible;
+        }
         
         Vector3 eulerAngles = transform.localEulerAngles;
 
