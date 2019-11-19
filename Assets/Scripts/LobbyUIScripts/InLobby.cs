@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InLobby : MonoBehaviour
 {
@@ -36,9 +37,11 @@ public class InLobby : MonoBehaviour
     {
         if (AllPlayersReady())
         {
-            Set_Port_and_IP(this.lobbyID); 
-        }
-    }
+            Set_Port_and_IP(this.lobbyID);
+			SceneManager.LoadScene(1);
+
+		}
+	}
 
     // method to update the current players in the lobby
     public void UpdateCurrentPlayers()
