@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerAiming : MonoBehaviour {
+public class PlayerAiming : NetworkBehaviour {
 
     [Header ("References")]
-    public Transform bodyTransform = null;
+    public Transform bodyTransform;
+    [SerializeField]
+    private NetworkIdentity identity;
 
     [Header ("Sensitivity")]
     public float sensitivityMultiplier = 1f;
@@ -38,10 +41,14 @@ public class PlayerAiming : MonoBehaviour {
     }
 
     void Update () {
+        Debug.Log("ID: " + identity.netId + " hasAuthority: " + identity.hasAuthority);
+        if (!identity.isLocalPlayer)
+            return;
+        Debug.Log("ID: " + identity.netId + " is local player");
         
         Vector3 eulerAngles = transform.localEulerAngles;
 
-        // Remove previous rotation
+        // Remove previous rotationx
         eulerAngles = new Vector3 (eulerAngles.x - cameraRotationTemp.x, eulerAngles.y, eulerAngles.z - cameraRotationTemp.z);
         bodyTransform.eulerAngles -= cameraRotationTemp.y * Vector3.up;
         
