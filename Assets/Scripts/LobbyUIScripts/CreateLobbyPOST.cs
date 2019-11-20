@@ -12,6 +12,17 @@ public class CreateLobbyPOST : MonoBehaviour
 
     public void CreateLobby(string gameType, string isJoinable, int maxPlayers)
     {
+        bool joinable; 
+        if (isJoinable == "true")
+        {
+            joinable = true;
+        }
+        else
+        {
+            Debug.Log("hello"); 
+            joinable = false; 
+        }
+   
         try
         {
             string webAddr = "http://lobbyservice.mooo.com:8080/lobbies/create";
@@ -22,7 +33,16 @@ public class CreateLobbyPOST : MonoBehaviour
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = "{\"GameType\":\"" + gameType + "\",\"" + "Joinable\":" + isJoinable + "," + "\"MaximumPlayers\":" + maxPlayers + "}";
+                LobbyInfo newLobby = new LobbyInfo
+                {
+                    GameType = gameType,
+                    Joinable = joinable,
+                    MaximumPlayers = maxPlayers,
+
+                };
+                string json = LobbyInfo.CreateJSON(newLobby);
+                Debug.Log(json); 
+                //string json = "{\"GameType\":\"" + gameType + "\",\"" + "Joinable\":" + isJoinable + "," + "\"MaximumPlayers\":" + maxPlayers + "}";
 
                 streamWriter.Write(json);
                 streamWriter.Flush();
