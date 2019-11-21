@@ -26,7 +26,7 @@ public class InLobby : MonoBehaviour
     private int[] curPlayers;
     // var to store lobby inorder to minimize API calls
     LobbyInfo curLobby;
-
+    //public GameObject networkObject;
     //Start is called before the first frame update
     void Start()
     {
@@ -39,6 +39,8 @@ public class InLobby : MonoBehaviour
         {
             Set_Port_and_IP(this.lobbyID);
 			SceneManager.LoadScene(1);
+
+            //networkObject.GetComponent<NetworkManagerHUD>().showGUI = true; 
 
         }
     }
