@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class playerInventory : MonoBehaviour
 {
-    public GameObject heldItem;
+    public static GameObject heldItem;
+    public GameObject[] itemPrefabs;
 
-    public void setItem(GameObject ob)
+    public void setItem()
     {
-        this.heldItem = ob;
+        GameObject itemtogive = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+        heldItem = itemtogive;
+        Debug.Log("setting players item to have " + itemtogive.name);
     }
 
     public void UsedItem()
     {
-        this.heldItem = null;
+        heldItem = null;
     }
     
 
     // Start is called before the first frame update
     void Start()
     {
-        this.heldItem = null;
+        heldItem = null;
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class playerInventory : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (this.heldItem != null)
+            if (heldItem != null)
             {
                 Instantiate(heldItem, transform.position, transform.rotation);
                 UsedItem();
