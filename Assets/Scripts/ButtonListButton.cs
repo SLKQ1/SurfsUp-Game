@@ -10,20 +10,19 @@ public class ButtonListButton : MonoBehaviour
     private ButtonListControl lobbyNum;
 
     // string to hold text of button 
-    private int LobbyIDCopy; 
+    private string myTextString; 
 
     // function to set button text
-    public void SetText(int LobbyID, string ButtonTextString)
+    public void SetText(string textString)
     {
-        this.gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
-        LobbyIDCopy = LobbyID;
-        myText.text = ButtonTextString; 
+        this.gameObject.GetComponent<Button>().onClick.AddListener(OnClick); 
+        myTextString = textString; 
+        myText.text = textString; 
     }
 
     // function to provide logic on a click 
     public void OnClick()
     {
-
-        lobbyNum.ButtonClicked(LobbyIDCopy); 
+        lobbyNum.ButtonClicked(myTextString); 
     }
 }
