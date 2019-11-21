@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fragsurf.Movement;
+using Mirror;
 
-public class Booster : MonoBehaviour
+public class Booster : NetworkBehaviour
 {
     /// Force impulse depends on rigit body mass
     [SerializeField]
