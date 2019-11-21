@@ -59,7 +59,7 @@ public class InLobby : MonoBehaviour
                 string curPlayerName = player.PlayerName;
                 string curPlayerTeam = player.PlayerTeam;
                 bool curPlayerStatus = player.PlayerReady;
-                curPlayersText.text += curPlayerName + " " + curPlayerTeam + " " + curPlayerStatus + "\n";
+                curPlayersText.text += "Player: " + curPlayerName + " " + curPlayerTeam + " ,Player Ready:" + curPlayerStatus + "\n";
             }
 
         }
