@@ -50,10 +50,10 @@ namespace Mirror
                     // LAN Host
                     if (Application.platform != RuntimePlatform.WebGLPlayer)
                     {
-                        if (GUILayout.Button("LAN Host"))
-                        {
-                            manager.StartHost();
-                        }
+                        //if (GUILayout.Button("LAN Host"))
+                        //{
+                        //    manager.StartHost();
+                        //}
                     }
 
                     // LAN Client + IP
@@ -66,15 +66,15 @@ namespace Mirror
                     GUILayout.EndHorizontal();
 
                     // LAN Server Only
-                    if (Application.platform == RuntimePlatform.WebGLPlayer)
-                    {
-                        // cant be a server in webgl build
-                        GUILayout.Box("(  WebGL cannot be server  )");
-                    }
-                    else
-                    {
-                        if (GUILayout.Button("LAN Server Only")) manager.StartServer();
-                    }
+                    //if (Application.platform == RuntimePlatform.WebGLPlayer)
+                    //{
+                    //    // cant be a server in webgl build
+                    //    GUILayout.Box("(  WebGL cannot be server  )");
+                    //}
+                    //else
+                    //{
+                    //    if (GUILayout.Button("LAN Server Only")) manager.StartServer();
+                    //}
                 }
                 else
                 {
