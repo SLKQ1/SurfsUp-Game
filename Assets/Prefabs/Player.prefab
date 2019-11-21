@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604093a680e6d5a488206647cc35be23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   bodyTransform: {fileID: 9185724841914840060}
+  identity: {fileID: 7548219289488666704}
   sensitivityMultiplier: 1
   horizontalSensitivity: 1
   verticalSensitivity: 1
@@ -93,7 +96,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7839671825154125442}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -147,6 +150,7 @@ GameObject:
   - component: {fileID: 9185724841914840060}
   - component: {fileID: 9185724841914840063}
   - component: {fileID: 9185724841914840062}
+  - component: {fileID: 7802615471528096525}
   - component: {fileID: 8701245962929893622}
   - component: {fileID: 7548219289488666704}
   - component: {fileID: 4938163189776447591}
@@ -166,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9185724841914840056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 104.047, z: 0}
+  m_LocalPosition: {x: -12, y: 104, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4834216013768191557}
@@ -218,6 +222,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7802615471528096525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185724841914840056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84cda0943f626f4eb2f670ec0c99488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heldItem: {fileID: 0}
+  itemPrefabs:
+  - {fileID: 4962913735486445752, guid: f52b37b6338cd2a4d949458bd54e87f1, type: 3}
+  - {fileID: 9054470850487438263, guid: b743655133bde3240a246e9b8f6a1f64, type: 3}
+  - {fileID: 3725967112908819260, guid: 24fb0587fc3b07e41adb7dfc302c7565, type: 3}
 --- !u!114 &8701245962929893622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601d4686cc0b70d45a98271d52094850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  m_camera: {fileID: 7767308770119557865}
+  lives: 3
   colliderSize: {x: 1, y: 2, z: 1}
   collisionType: 0
   weight: 1
