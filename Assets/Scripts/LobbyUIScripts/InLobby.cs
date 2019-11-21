@@ -11,10 +11,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InLobby : MonoBehaviour
 {
-    public Text curPlayersText;
+    public TextMeshProUGUI curPlayersTextTMP; 
     [SerializeField]
     private Text LobbyIDText;
     private int lobbyID;
@@ -48,7 +49,7 @@ public class InLobby : MonoBehaviour
     // method to update the current players in the lobby
     public void UpdateCurrentPlayers()
     {
-        curPlayersText.text = "\n"; 
+        curPlayersTextTMP.text = "\n"; 
         // update the text to show all the current players and ready statuses
         if (lobbyID != 0)
         {
@@ -61,7 +62,8 @@ public class InLobby : MonoBehaviour
                 string curPlayerName = player.PlayerName;
                 //string curPlayerTeam = player.PlayerTeam;
                 bool curPlayerStatus = player.PlayerReady;
-                curPlayersText.text += "Player Name: " + curPlayerName + " ,Player Ready: " + curPlayerStatus + "\n";
+                curPlayersTextTMP.text += "\nPlayer Name: " + curPlayerName + "\nPlayer Ready: " + curPlayerStatus + "\n";
+
             }
 
         }
