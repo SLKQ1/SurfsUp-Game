@@ -21,10 +21,12 @@ public class giveItem : MonoBehaviour
 
     void givePlayer(Collider player)
     {
-        Debug.Log("Picked up!");
-        Instantiate(pickupEffect, transform.position, transform.rotation);
-        int randomItem = Random.Range(0, itemPrefabs.Length);
+        GameObject explosion = Instantiate(pickupEffect, transform.position, transform.rotation);
+        Destroy(explosion, 1.5f);
+        GameObject itemtogive = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+        print(itemtogive.name);
     }
+
 
     // Start is called before the first frame update
     void Start()
