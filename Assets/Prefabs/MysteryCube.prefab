@@ -118,9 +118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a513149bd1f8943bcd721c4229afb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pi: {fileID: 7802615471528096525, guid: 16673dc077c99ab4b8238e2b5c524d78, type: 3}
   itemPrefabs:
   - {fileID: 4962913735486445752, guid: f52b37b6338cd2a4d949458bd54e87f1, type: 3}
-  - {fileID: 3057946396133319631, guid: 5cbc3eb28727c1e4f9957080a49f9260, type: 3}
+  - {fileID: 9054470850487438263, guid: b743655133bde3240a246e9b8f6a1f64, type: 3}
   - {fileID: 3725967112908819260, guid: 24fb0587fc3b07e41adb7dfc302c7565, type: 3}
   pickupEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}
