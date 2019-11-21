@@ -19,6 +19,10 @@ public class CreateLobbyButton : MonoBehaviour
     {
         Debug.Log(gameTypeOptions[index]);
         gameType = gameTypeOptions[index];
+        if (gameType == "Solo")
+        {
+            MaxPlayers.text = "1"; 
+        }
     }
 
     private void Start()
