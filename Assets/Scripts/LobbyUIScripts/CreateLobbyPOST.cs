@@ -10,18 +10,8 @@ public class CreateLobbyPOST : MonoBehaviour
 {
     InputField MaximumPlayers; 
 
-    public void CreateLobby(string gameType, string isJoinable, int maxPlayers)
+    public void CreateLobby(string gameType, int maxPlayers)
     {
-        bool joinable; 
-        if (isJoinable == "true")
-        {
-            joinable = true;
-        }
-        else
-        {
-            Debug.Log("hello"); 
-            joinable = false; 
-        }
    
         try
         {
@@ -36,7 +26,6 @@ public class CreateLobbyPOST : MonoBehaviour
                 LobbyInfo newLobby = new LobbyInfo
                 {
                     GameType = gameType,
-                    Joinable = joinable,
                     MaximumPlayers = maxPlayers,
 
                 };
