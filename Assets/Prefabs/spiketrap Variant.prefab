@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 332448184}
   - component: {fileID: 332448183}
   - component: {fileID: 332448182}
-  - component: {fileID: 332448181}
+  - component: {fileID: 3240371893830972001}
+  - component: {fileID: 4665845325046756148}
   m_Layer: 0
   m_Name: respawn trigger
   m_TagString: Untagged
@@ -92,7 +93,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &332448181
+--- !u!114 &3240371893830972001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,10 +102,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 332448179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ffd031de1b09740a2feacb791e51a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f6312e99a3bb4b429eb8ee59b0b1656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCoords: {x: -12, y: 104, z: 0}
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &4665845325046756148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332448179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 24fb0587fc3b07e41adb7dfc302c7565
+  m_SceneId: 0
 --- !u!1001 &3725967112908721562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 100006, guid: 57efd73870618b24db507cac76d20598, type: 3}
-      propertyPath: m_Name
-      value: spiketrap
-      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 57efd73870618b24db507cac76d20598, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.6
@@ -159,6 +173,10 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 57efd73870618b24db507cac76d20598, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 57efd73870618b24db507cac76d20598, type: 3}
+      propertyPath: m_Name
+      value: spiketrap Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57efd73870618b24db507cac76d20598, type: 3}
