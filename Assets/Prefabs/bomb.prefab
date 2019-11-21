@@ -87,7 +87,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 255725562304340966}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 1.9999999
   m_Direction: 1
@@ -179,7 +179,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4374950379501593430}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.50000006
   m_Height: 1.9999999
   m_Direction: 1
@@ -195,8 +195,6 @@ GameObject:
   - component: {fileID: 4390592434453661213}
   - component: {fileID: 9194597225468078674}
   - component: {fileID: 6378784171649104728}
-  - component: {fileID: 8057607970145553344}
-  - component: {fileID: 7929127838650254278}
   - component: {fileID: 2019663073752027700}
   m_Layer: 0
   m_Name: bomb
@@ -266,35 +264,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8057607970145553344
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9054470850487438263}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7929127838650254278
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9054470850487438263}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!136 &2019663073752027700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -303,7 +272,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9054470850487438263}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.6
   m_Height: 1

@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using Fragsurf.Movement;
 
 public class giveItem : MonoBehaviour
 {
-    public GameObject[] itemPrefabs;
+    public playerInventory pi;
+    public GameObject pickupEffect;
+
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        GameObject player = other.transform.parent.gameObject;
+        SurfCharacter surfChar = player.GetComponent<SurfCharacter>();
+        if (surfChar != null)
         {
             givePlayer();
         }
@@ -16,9 +22,11 @@ public class giveItem : MonoBehaviour
 
     void givePlayer()
     {
-        int randomItem = Random.Range(0, itemPrefabs.Length);
-        print("Player got "+  randomItem);
+        GameObject explosion = Instantiate(pickupEffect, transform.position, transform.rotation);
+        Destroy(explosion, 1.5f);
+        pi.setItem();
     }
+
 
     // Start is called before the first frame update
     void Start()
