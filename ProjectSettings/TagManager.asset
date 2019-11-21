@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - NetworkObject
-  - LobbyIDText
-  - LobbyListButton
+  - StartPlat
   layers:
   - Default
   - TransparentFX
