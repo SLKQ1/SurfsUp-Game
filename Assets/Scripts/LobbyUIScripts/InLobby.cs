@@ -86,7 +86,6 @@ public class InLobby : MonoBehaviour
     public void SetPlayer(PlayerInfo cur_Player)
     {
         this.currentPlayer = cur_Player;
-        Debug.Log(this.currentPlayer.PlayerName); 
     }
 
     // method to get the current lobby from the API
