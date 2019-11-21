@@ -10,6 +10,7 @@ public class LobbyInfo
 
     public int ID;
     public string GameType;
+    public bool Joinable; 
     public bool IsStarted;
     public int[] CurrentPlayers;
     public int MaximumPlayers;
@@ -18,6 +19,11 @@ public class LobbyInfo
     {
         return JsonConvert.DeserializeObject<LobbyInfo>(jsonString); 
     }
+    public static string CreateJSON(LobbyInfo lobby)
+    {
+        return JsonConvert.SerializeObject(lobby);
+    }
+
 
 
 }

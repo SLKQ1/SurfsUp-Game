@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+using Fragsurf.Movement;
 
-public class TeleportPlayer : MonoBehaviour
+public class TeleportPlayer : NetworkBehaviour  
 {
 	[SerializeField]
 	private Vector3 spawnCoords = new Vector3(-12,104,0);
@@ -21,10 +23,10 @@ public class TeleportPlayer : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		GameObject player = other.transform.parent.gameObject;
-		Transform playerTransform = player.GetComponent<Transform>();
-		if (playerTransform != null)
-		{
-			playerTransform.position = spawnCoords;
-		}
-	}
+        Transform playerTransform = player.GetComponent<Transform>();
+        if (playerTransform != null)
+        {
+            playerTransform.position = spawnCoords;
+        }
+    }
 }
