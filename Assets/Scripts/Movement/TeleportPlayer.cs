@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Fragsurf.Movement;
 
 public class TeleportPlayer : NetworkBehaviour  
 {
@@ -22,10 +23,10 @@ public class TeleportPlayer : NetworkBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		GameObject player = other.transform.parent.gameObject;
-		Transform playerTransform = player.GetComponent<Transform>();
-		if (playerTransform != null)
-		{
-			playerTransform.position = spawnCoords;
-		}
-	}
+        Transform playerTransform = player.GetComponent<Transform>();
+        if (playerTransform != null)
+        {
+            playerTransform.position = spawnCoords;
+        }
+    }
 }
