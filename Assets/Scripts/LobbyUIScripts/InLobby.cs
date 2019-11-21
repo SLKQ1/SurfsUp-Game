@@ -25,9 +25,9 @@ public class InLobby : MonoBehaviour
     // var to store player id array to minimize API calls
     private int[] curPlayers;
     // var to store lobby inorder to minimize API calls
-    LobbyInfo curLobby; 
-    //Start is called before the first frame update
+    LobbyInfo curLobby;
 
+    //Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("UpdateCurrentPlayers", 0f, 1f);
@@ -40,8 +40,8 @@ public class InLobby : MonoBehaviour
             Set_Port_and_IP(this.lobbyID);
 			SceneManager.LoadScene(1);
 
-		}
-	}
+        }
+    }
 
     // method to update the current players in the lobby
     public void UpdateCurrentPlayers()
