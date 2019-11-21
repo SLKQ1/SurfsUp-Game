@@ -7,28 +7,35 @@ public class LobbyManager : MonoBehaviour
     public static LobbyManager Instance { set; get; }
 
     // game objects for each screen on the menu
+    //public GameObject createPlayerMenu; 
     public GameObject mainMenu;
     public GameObject lobbyListMenu;
-    public GameObject hostGameMenu;
-    public GameObject lobbyJoinMenu; 
+    public GameObject createLobbyMenu;
+    public GameObject lobbyJoinMenu;
+    public GameObject inLobbyMenu; 
 
     // Start is called before the first frame update
     private void Start()
     {
         Instance = this;
+        //createPlayerMenu.SetActive(true);
+        mainMenu.SetActive(true); 
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false);
-        lobbyJoinMenu.SetActive(false); 
+        createLobbyMenu.SetActive(false);
+        lobbyJoinMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
         DontDestroyOnLoad(gameObject); 
     }
 
     // host button
-    public void HostButton()
+    public void CreateLobbyButton()
     {
-        Debug.Log("Host");
-        hostGameMenu.SetActive(true);
+        Debug.Log("Create Lobby");
+        createLobbyMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        inLobbyMenu.SetActive(false); 
     }
 
     // button to display lobbies
@@ -38,15 +45,28 @@ public class LobbyManager : MonoBehaviour
         lobbyListMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+
     }
 
     // button that is each lobby instance in lobbyListMenu
     public void LobbyInstanceButton()
     {
-        lobbyJoinMenu.SetActive(true); 
+        lobbyJoinMenu.SetActive(true);
         mainMenu.SetActive(false);
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false); 
+        createLobbyMenu.SetActive(false); 
+
+    }
+    // button to switch to in lobby canvas
+    public void InLobbyCanvasButton()
+    {
+        mainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        lobbyJoinMenu.SetActive(false);
+        inLobbyMenu.SetActive(true); 
 
     }
 
@@ -55,10 +75,12 @@ public class LobbyManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         lobbyListMenu.SetActive(false);
-        hostGameMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
         lobbyJoinMenu.SetActive(false);
 
     }
+
+
 
 
 }
