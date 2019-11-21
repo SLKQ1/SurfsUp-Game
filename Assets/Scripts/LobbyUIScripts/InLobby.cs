@@ -57,9 +57,9 @@ public class InLobby : MonoBehaviour
             {
                 PlayerInfo player = GetPlayer(curPlayers[i]); 
                 string curPlayerName = player.PlayerName;
-                string curPlayerTeam = player.PlayerTeam;
+                //string curPlayerTeam = player.PlayerTeam;
                 bool curPlayerStatus = player.PlayerReady;
-                curPlayersText.text += "Player: " + curPlayerName + " " + curPlayerTeam + " ,Player Ready:" + curPlayerStatus + "\n";
+                curPlayersText.text += "Player Name: " + curPlayerName + " ,Player Ready: " + curPlayerStatus + "\n";
             }
 
         }

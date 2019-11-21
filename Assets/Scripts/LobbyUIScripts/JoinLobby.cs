@@ -9,7 +9,7 @@ public class JoinLobby : MonoBehaviour
 {
 
     public InputField PlayerName;
-    public InputField PlayerTeamColour;
+    //public InputField PlayerTeamColour;
     [SerializeField]
     private Text LobbyIDText;
     private int lobbyID;
@@ -26,7 +26,7 @@ public class JoinLobby : MonoBehaviour
 
     // function to create a player by sending a post request to API
     // function then returns a new player of type PlayerInfo
-    public PlayerInfo CreatePlayer(int LobbyID, string PlayerName, string PlayerTeam)
+    public PlayerInfo CreatePlayer(int LobbyID, string PlayerName)
     {
         var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
@@ -36,9 +36,9 @@ public class JoinLobby : MonoBehaviour
         {
             PlayerInfo newPlayer = new PlayerInfo
             {
-                LobbyID = lobbyID,
+                LobbyID = LobbyID,
                 PlayerName = PlayerName,
-                PlayerTeam = PlayerTeam,
+                //PlayerTeam = PlayerTeam,
                 //PlayerReady = true
             };
 
@@ -96,9 +96,7 @@ public class JoinLobby : MonoBehaviour
     {
 
         //// creates a new player      
-        PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text, PlayerTeamColour.text);
-        //PortAndIP test = new PortAndIP();
-        //test.Set_Port_and_IP(this.lobbyID);
+        PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text);
 
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
