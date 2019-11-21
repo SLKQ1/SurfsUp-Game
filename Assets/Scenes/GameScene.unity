@@ -18521,7 +18521,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3725967112908819260, guid: 24fb0587fc3b07e41adb7dfc302c7565,
         type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6491266389684835601, guid: 6f8a49a0b728ac44f973211bd97629d4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f8a49a0b728ac44f973211bd97629d4, type: 3}
 --- !u!43 &728208195
 Mesh:
@@ -54877,7 +54878,7 @@ PrefabInstance:
     - target: {fileID: 4665845325046756148, guid: 24fb0587fc3b07e41adb7dfc302c7565,
         type: 3}
       propertyPath: m_SceneId
-      value: 39464213
+      value: 2607845000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24fb0587fc3b07e41adb7dfc302c7565, type: 3}

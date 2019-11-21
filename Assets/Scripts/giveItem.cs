@@ -6,8 +6,10 @@ using Fragsurf.Movement;
 
 public class giveItem : MonoBehaviour
 {
+    public playerInventory pi;
     public GameObject[] itemPrefabs;
     public GameObject pickupEffect;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -15,16 +17,17 @@ public class giveItem : MonoBehaviour
         SurfCharacter surfChar = player.GetComponent<SurfCharacter>();
         if (surfChar != null)
         {
-            givePlayer(other);
+            givePlayer();
         }
     }
 
-    void givePlayer(Collider player)
+    void givePlayer()
     {
         GameObject explosion = Instantiate(pickupEffect, transform.position, transform.rotation);
         Destroy(explosion, 1.5f);
         GameObject itemtogive = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
-        print(itemtogive.name);
+        pi.setItem(itemtogive);
+        Debug.Log("setting players item to have " + itemtogive.name);
     }
 
 
