@@ -7,7 +7,7 @@ using Fragsurf.Movement;
 public class TeleportPlayer : NetworkBehaviour  
 {
 	[SerializeField]
-	private Vector3 spawnCoords = new Vector3(-12,104,0);
+	private Vector3 spawnCoords = new Vector3(-40,300,0);
     // Start is called before the first frame update
     void Start()
     {
