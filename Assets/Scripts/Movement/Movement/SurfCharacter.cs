@@ -23,6 +23,8 @@ namespace Fragsurf.Movement {
         [Header("Lives")]
         [SerializeField]
         private int lives = 3;
+        [SerializeField]
+        private Vector3 Spectate_Area = new Vector3(0,0,0);
 
         ///// Fields /////
         [Header("Physics Settings")]
@@ -272,17 +274,18 @@ namespace Fragsurf.Movement {
 
         }
 
-        public void Death () {
+        public void Death ()
+        {
+            lives--;
             if (lives > 0)
             {
                 moveData.velocity = Vector3.zero;
                 moveData.origin = _startPosition;
             }else
             {
-                // tp to spectating area
-                Debug.Log("TODO");
+                moveData.velocity = Vector3.zero;
+                moveData.origin = Spectate_Area;
             }
-            lives--;
         }
 
         private void UpdateMoveData () {
