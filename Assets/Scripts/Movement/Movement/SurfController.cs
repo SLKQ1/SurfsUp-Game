@@ -417,8 +417,18 @@ namespace Fragsurf.Movement {
         /// <summary>
         /// 
         /// </summary>
-        private bool CheckGrounded () {
-
+        public bool CheckGrounded () {
+            if (_surfer == null)
+            {
+                Debug.Log("Here 1");
+                return false;
+            }
+            if (_surfer.moveData == null)
+            {
+                Debug.Log("Here 2");
+                return false;
+            }
+            Debug.Log("Here 3");
             _surfer.moveData.surfaceFriction = 1f;
             var movingUp = _surfer.moveData.velocity.y > 0f;
             var trace = TraceToFloor ();
