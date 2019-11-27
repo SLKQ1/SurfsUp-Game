@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
 using Mirror;
+using UnityEngine.UI;
 
 namespace Fragsurf.Movement {
 
@@ -25,6 +26,13 @@ namespace Fragsurf.Movement {
         private int lives = 3;
         [SerializeField]
         private Vector3 Spectate_Area = new Vector3(0,0,0);
+
+
+        [Header("UI")]
+        [SerializeField]
+        private Text Lives_Text;
+        [SerializeField]
+        private Text Speed_Text;
 
         ///// Fields /////
         [Header("Physics Settings")]
@@ -118,7 +126,8 @@ namespace Fragsurf.Movement {
         }
 
         private void Start () {
-            
+            Lives_Text.text = "Lives: "+lives;
+
             _colliderObject = new GameObject ("PlayerCollider");
             _colliderObject.layer = gameObject.layer;
             _colliderObject.transform.SetParent (transform);
@@ -265,6 +274,7 @@ namespace Fragsurf.Movement {
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
+            Speed_Text.text = "Speed: " + _controller.speed.ToString("F2");
         }
 
         private void UpdateTestBinds () {
@@ -286,6 +296,7 @@ namespace Fragsurf.Movement {
                 moveData.velocity = Vector3.zero;
                 moveData.origin = Spectate_Area;
             }
+            Lives_Text.text = "Lives: " + lives;
         }
 
         private void UpdateMoveData () {
