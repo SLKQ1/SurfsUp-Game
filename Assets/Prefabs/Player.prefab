@@ -346,6 +346,7 @@ MonoBehaviour:
   syncInterval: 0.1
   m_camera: {fileID: 7767308770119557865}
   lives: 3
+  Spectate_Area: {x: -7, y: 155, z: 2}
   colliderSize: {x: 1, y: 2, z: 1}
   collisionType: 0
   weight: 1
@@ -363,7 +364,7 @@ MonoBehaviour:
     jumpForce: 6.5
     friction: 7
     maxSpeed: 10
-    maxVelocity: 50
+    maxVelocity: 45
     slopeLimit: 45
     clampAirSpeed: 1
     airCap: 0.4
