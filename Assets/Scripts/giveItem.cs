@@ -6,7 +6,6 @@ using Fragsurf.Movement;
 
 public class giveItem : MonoBehaviour
 {
-    public playerInventory pi;
     public GameObject pickupEffect;
 
 
@@ -24,7 +23,6 @@ public class giveItem : MonoBehaviour
     {
         GameObject explosion = Instantiate(pickupEffect, transform.position, transform.rotation);
         Destroy(explosion, 1.5f);
-        pi.setItem();
     }
 
 

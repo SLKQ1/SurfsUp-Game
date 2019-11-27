@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8173039819861285327}
   - component: {fileID: 8173039819861285326}
   - component: {fileID: 8173039819861285329}
-  - component: {fileID: 2542888330163660719}
-  - component: {fileID: 433218412453599378}
+  - component: {fileID: 5198781062416677099}
+  - component: {fileID: 4884950414998282530}
   m_Layer: 0
   m_Name: MysteryCube
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d912312701cdd0439b85daf194228ff, type: 2}
+  - {fileID: 2100000, guid: a59ebfedc3ddc0341ac65c6c69a74799, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +107,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateAmount: {x: 0, y: 20, z: 0}
---- !u!114 &2542888330163660719
+--- !u!114 &5198781062416677099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173039819861285331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52eadbd98d414d45843afa7a6945aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  pickupEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
+    type: 3}
+  velocityMultiplier: 1.7
+--- !u!114 &4884950414998282530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,20 +140,3 @@ MonoBehaviour:
   localPlayerAuthority: 0
   m_AssetId: 6f8a49a0b728ac44f973211bd97629d4
   m_SceneId: 0
---- !u!114 &433218412453599378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8173039819861285331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d19da42bdb94264a9d48078314c6726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  pickupEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
-    type: 3}
-  velocityMultiplier: 2
