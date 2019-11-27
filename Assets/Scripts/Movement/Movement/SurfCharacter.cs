@@ -26,6 +26,9 @@ namespace Fragsurf.Movement {
         private int lives = 3;
         [SerializeField]
         private Vector3 Spectate_Area = new Vector3(0,0,0);
+        [SerializeField]
+        private float Max_Time_Grounded = 10f;
+        private float time_grounded = 0f;
 
 
         [Header("UI")]
@@ -33,6 +36,8 @@ namespace Fragsurf.Movement {
         private Text Lives_Text;
         [SerializeField]
         private Text Speed_Text;
+        [SerializeField]
+        private Text Grounded_Text;
 
         ///// Fields /////
         [Header("Physics Settings")]
@@ -126,7 +131,8 @@ namespace Fragsurf.Movement {
         }
 
         private void Start () {
-            Lives_Text.text = "Lives: "+lives;
+            if (isLocalPlayer)
+                Lives_Text.text = "Lives: "+lives;
 
             _colliderObject = new GameObject ("PlayerCollider");
             _colliderObject.layer = gameObject.layer;
@@ -267,14 +273,23 @@ namespace Fragsurf.Movement {
                 _controller.Crouch (this, movementConfig, Time.deltaTime);
 
             _controller.ProcessMovement (this, movementConfig, Time.deltaTime);
+            if (lives > 0)
+            {
+                if (moveData.velocity.y == 0f)
+                {
+                    time_grounded += Time.deltaTime;
+                }
+                if (time_grounded > Max_Time_Grounded)
+                    Death();
+            }
 
-            Debug.Log("updating position for:" + netId);
             transform.position = moveData.origin;
             prevPosition = transform.position;
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
             Speed_Text.text = "Speed: " + _controller.speed.ToString("F2");
+            Grounded_Text.text = "Time to death: " + (Max_Time_Grounded - time_grounded).ToString("F2");
         }
 
         private void UpdateTestBinds () {
@@ -287,6 +302,7 @@ namespace Fragsurf.Movement {
         public void Death ()
         {
             lives--;
+            time_grounded = 0;
             if (lives > 0)
             {
                 moveData.velocity = Vector3.zero;
@@ -296,7 +312,8 @@ namespace Fragsurf.Movement {
                 moveData.velocity = Vector3.zero;
                 moveData.origin = Spectate_Area;
             }
-            Lives_Text.text = "Lives: " + lives;
+            if (isLocalPlayer)
+                Lives_Text.text = "Lives: " + lives;
         }
 
         private void UpdateMoveData () {
