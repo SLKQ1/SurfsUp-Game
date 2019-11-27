@@ -314,7 +314,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379438958847010090}
-  m_Text: How areksj skj a
+  m_Text: f
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -750,8 +750,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 1
-  m_AssetId: 16673dc077c99ab4b8238e2b5c524d78
-  m_SceneId: 0
+  m_AssetId: 
+  m_SceneId: 1340913982
 --- !u!114 &4938163189776447591
 MonoBehaviour:
   m_ObjectHideFlags: 0
