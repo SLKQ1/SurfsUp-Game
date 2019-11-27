@@ -430,7 +430,12 @@ namespace Mirror
             }
             return true;
         }
-
+        public void SetPlayerName(string name)
+        {
+            Debug.Log("HELLLLLLLLLLLOOOOOOOOOO"); 
+            playerPrefab.transform.GetChild(0).GetComponent<TextMesh>().text = name;
+            Debug.Log(name); 
+        }
         void RegisterClientMessages()
         {
             NetworkClient.RegisterHandler<ConnectMessage>(OnClientConnectInternal);
@@ -441,6 +446,7 @@ namespace Mirror
 
             if (playerPrefab != null)
             {
+                //SetPlayerName()
                 ClientScene.RegisterPrefab(playerPrefab);
             }
             for (int i = 0; i < spawnPrefabs.Count; i++)
@@ -907,12 +913,32 @@ namespace Mirror
         /// <param name="extraMessage">An extra message object passed for the new player.</param>
         public virtual void OnServerAddPlayer(NetworkConnection conn, AddPlayerMessage extraMessage)
         {
+            //Debug.Log("HELLLLLLLLLLLLLLLLLLLLLLO");
+            //Debug.Log(player.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //playerPrefab.transform.GetChild(0).GetComponent<TextMesh>().text = "yo was good";
+            //Debug.Log(playerPrefab.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //Debug.Log("BYEEEEEEEEEEEEEEEEEEEEEEE");
+
             Transform startPos = GetStartPosition();
             GameObject player = startPos != null
                 ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
                 : Instantiate(playerPrefab);
+            //Debug.Log("HELLLLLLLLLLLLLLLLLLLLLLO");
+            ////Debug.Log(player.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //player.transform.GetChild(0).GetComponent<TextMesh>().text = "yo was good";
+            //Debug.Log(player.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //Debug.Log("BYEEEEEEEEEEEEEEEEEEEEEEE");
 
             NetworkServer.AddPlayerForConnection(conn, player);
+
+            //Debug.Log("HELLLLLLLLLLLLLLLLLLLLLLO");
+            ////Debug.Log(player.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //player.transform.GetChild(0).GetComponent<TextMesh>().text = "yo was good";
+            //Debug.Log(player.transform.GetChild(0).GetComponent<TextMesh>().text);
+            //Debug.Log("BYEEEEEEEEEEEEEEEEEEEEEEE");
+
+
+
         }
 
         /// <summary>

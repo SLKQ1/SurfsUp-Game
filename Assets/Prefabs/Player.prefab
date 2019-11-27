@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4806853086006701412}
   m_Layer: 8
   m_Name: nametext
-  m_TagString: Untagged
+  m_TagString: PlayerName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6574954611385437540}
-  m_Text: Player
+  m_Text: P1
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

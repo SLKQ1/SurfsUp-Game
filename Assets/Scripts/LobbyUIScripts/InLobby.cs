@@ -28,6 +28,8 @@ public class InLobby : MonoBehaviour
     // var to store lobby inorder to minimize API calls
     LobbyInfo curLobby;
     //public GameObject networkObject;
+    public NetworkManager NetworkManagerScript;
+
     //Start is called before the first frame update
     void Start()
     {
@@ -122,6 +124,8 @@ public class InLobby : MonoBehaviour
 
                 var response = await httpClient.SendAsync(request);
             }
+            GameObject.FindGameObjectWithTag("NetworkObject").SendMessage("SetPlayerName", playerName);
+
         }
 
 
