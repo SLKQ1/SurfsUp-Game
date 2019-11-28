@@ -97,7 +97,7 @@ public class JoinLobby : MonoBehaviour
 
         //// creates a new player      
         PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text);
-
+        PlayerInfo.PlayerNameStatic = newPlayer.PlayerName;
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
         inLobby.SetLobby(lobbyID);

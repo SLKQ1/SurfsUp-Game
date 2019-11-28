@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 4881936919408916369}
   - component: {fileID: 3626117801680720376}
   - component: {fileID: 8762737550775867645}
+  - component: {fileID: 4472216839855569788}
   m_Layer: 8
   m_Name: PlayerName3DText
   m_TagString: Untagged
@@ -474,7 +475,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379438958847010090}
-  m_Text: 
+  m_Text: psppsps
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -488,6 +489,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &4472216839855569788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379438958847010090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45079b9fe17524cf5a91a3f08f2c6cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7517714881516564737
 GameObject:
   m_ObjectHideFlags: 0
