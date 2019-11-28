@@ -42,6 +42,7 @@ public class InLobby : MonoBehaviour
         {
             Set_Port_and_IP(this.lobbyID);
 			SceneManager.LoadScene(1);
+            GameStateManager.maxPlayers = curPlayers.Length; 
 
             //networkObject.GetComponent<NetworkManagerHUD>().showGUI = true; 
 
