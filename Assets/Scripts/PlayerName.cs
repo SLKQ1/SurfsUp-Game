@@ -14,7 +14,7 @@ public class PlayerName : Mirror.NetworkBehaviour
 	{
 		if (isLocalPlayer)
 		{
-			GetComponent<TextMesh>().text = PlayerInfo.PlayerNameStatic;
+            transform.GetChild(1).GetComponent<TextMesh>().text = PlayerInfo.PlayerNameStatic;
 		}
 	}
 }
