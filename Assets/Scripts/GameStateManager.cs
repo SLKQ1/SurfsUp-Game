@@ -40,7 +40,7 @@ public class GameStateManager : MonoBehaviour
                     deadPlayers++;
                 }
             }
-            if (players.Length == maxPlayers)
+            if (players.Length == maxPlayers && players.Length != 1)
             {
                 winnerFound = deadPlayers == (players.Length - 1);
                 if (winnerFound)
