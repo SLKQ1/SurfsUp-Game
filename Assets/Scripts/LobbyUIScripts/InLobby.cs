@@ -12,6 +12,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Mirror;
 
 public class InLobby : MonoBehaviour
 {
@@ -27,8 +28,9 @@ public class InLobby : MonoBehaviour
     private int[] curPlayers;
     // var to store lobby inorder to minimize API calls
     LobbyInfo curLobby;
-    public NetworkManager NetowrkManagerScript; 
-    //public GameObject networkObject;
+    public Mirror.NetworkManager NetworkManagerScript;
+    public TelepathyTransport TelepathyTransportScript;
+
     //Start is called before the first frame update
     void Start()
     {
@@ -40,11 +42,15 @@ public class InLobby : MonoBehaviour
     {
         if (AllPlayersReady())
         {
-            Set_Port_and_IP(this.lobbyID);
-			SceneManager.LoadScene(1);
-            GameStateManager.maxPlayers = curPlayers.Length; 
+           
 
-            //networkObject.GetComponent<NetworkManagerHUD>().showGUI = true; 
+            Set_Port_and_IP(this.lobbyID);
+            SceneManager.LoadScene(1);
+            //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
+            GameStateManager.maxPlayers = curPlayers.Length; 
+           
+            Mirror.NetworkManager networkObject = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<Mirror.NetworkManager>();
+            networkObject.StartClient(); 
 
         }
     }
