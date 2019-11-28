@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fragsurf.Movement;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameStateManager : MonoBehaviour
 {
 
@@ -48,10 +50,25 @@ public class GameStateManager : MonoBehaviour
                     foreach (GameObject player in players)
                     {
                         player.transform.GetChild(3).GetChild(3).GetComponent<Text>().text = winnerName + ", Wins!";
+                        player.transform.GetChild(3).GetChild(4).GetComponent<Image>().enabled = true;
+                        player.transform.GetChild(3).GetChild(4).GetComponent<Button>().enabled = true;
+                        player.transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().enabled = true; 
+
                     }
                 }
 
             }
         }
+    }
+    
+    public void Disconnect()
+    {
+        // shutdown client
+        Mirror.NetworkClient.Disconnect();
+        Mirror.NetworkClient.Shutdown();
+  
+        // change scene 
+        SceneManager.LoadScene(0);
+
     }
 }
