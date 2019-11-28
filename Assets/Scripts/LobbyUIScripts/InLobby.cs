@@ -131,7 +131,7 @@ public class InLobby : MonoBehaviour
 
                 var response = await httpClient.SendAsync(request);
             }
-            GameObject.FindGameObjectWithTag("NetworkObject").SendMessage("SetPlayerName", playerName); 
+            //GameObject.FindGameObjectWithTag("NetworkObject").SendMessage("SetPlayerName", playerName); 
         }
 
 

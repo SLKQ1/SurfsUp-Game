@@ -475,7 +475,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379438958847010090}
-  m_Text: psppsps
+  m_Text: aa
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -501,6 +501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45079b9fe17524cf5a91a3f08f2c6cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &7517714881516564737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,8 +1098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 1
-  m_AssetId: 16673dc077c99ab4b8238e2b5c524d78
-  m_SceneId: 0
+  m_AssetId: 
+  m_SceneId: 687388544
 --- !u!114 &4938163189776447591
 MonoBehaviour:
   m_ObjectHideFlags: 0
