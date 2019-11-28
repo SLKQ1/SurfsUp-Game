@@ -7,8 +7,14 @@ public class PlayerName : Mirror.NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     if(isLocalPlayer) {
-            GetComponent<TextMesh>().text = PlayerInfo.PlayerNameStatic; 
-        }
+		InvokeRepeating("SetName", 0f, 1f); 
     }
+
+    void SetName()
+	{
+		if (isLocalPlayer)
+		{
+			GetComponent<TextMesh>().text = PlayerInfo.PlayerNameStatic;
+		}
+	}
 }
