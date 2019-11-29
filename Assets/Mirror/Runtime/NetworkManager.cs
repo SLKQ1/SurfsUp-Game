@@ -430,10 +430,6 @@ namespace Mirror
             }
             return true;
         }
-        //public void SetPlayerName(string name)
-        //{
-        //    playerPrefab.transform.GetChild(0).GetComponent<TextMesh>().text = name; 
-        //}
 
         void RegisterClientMessages()
         {

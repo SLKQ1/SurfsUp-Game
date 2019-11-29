@@ -28,7 +28,7 @@ public class JoinLobby : MonoBehaviour
     // function then returns a new player of type PlayerInfo
     public PlayerInfo CreatePlayer(int LobbyID, string PlayerName)
     {
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://159.89.115.92:8080/players/create");
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 
@@ -97,7 +97,7 @@ public class JoinLobby : MonoBehaviour
 
         //// creates a new player      
         PlayerInfo newPlayer = CreatePlayer(this.lobbyID, PlayerName.text);
-        PlayerInfo.PlayerNameStatic = newPlayer.PlayerName;
+
         // passing the lobby id and token to in lobby script
         inLobby = GameObject.FindObjectOfType<InLobby>();
         inLobby.SetLobby(lobbyID);
