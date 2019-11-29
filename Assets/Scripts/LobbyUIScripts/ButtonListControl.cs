@@ -19,7 +19,7 @@ public class ButtonListControl : MonoBehaviour
         InvokeRepeating("DestroyAllButtons", 0f, 5f); 
 
     }
-    private void Update()
+    private void LateUpdate()
     {
         DestroyAllButtons();
         GenButtons();
@@ -27,9 +27,17 @@ public class ButtonListControl : MonoBehaviour
 
     public void ButtonClicked(int LobbyID)
     {
-        // passing the lobby id to the Join lobby script so that it can set the text in canvas 
-        joinLobby = GameObject.FindObjectOfType<JoinLobby>();
-        joinLobby.SetLobbyID(LobbyID);
+        PlayerPatch newPlayerPatch = new PlayerPatch();
+        // changing players lobby id 
+        CurrentPlayer.curPlayer.LobbyID = LobbyID;
+        newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+
+        // changing the panel to lobby instance 
+        LobbyManager.Instance.MainMenu.SetActive(false);
+        LobbyManager.Instance.lobbyListMenu.SetActive(false);
+        LobbyManager.Instance.createLobbyMenu.SetActive(false);
+        LobbyManager.Instance.createPlayerMenu.SetActive(false);
+        LobbyManager.Instance.inLobbyMenu.SetActive(true);
 
     }
 
@@ -51,7 +59,7 @@ public class ButtonListControl : MonoBehaviour
                 button.SetActive(true);
 
                 // setting button text to be the lobby id and if it is started or not
-                button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID, "Lobby ID: " + LobbyList[i].ID + ", Is started: " + LobbyList[i].IsStarted);
+                button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID,LobbyList[i].GameType + "\t" +LobbyList[i].CurrentPlayers.Length.ToString() + "/" + LobbyList[i].MaximumPlayers.ToString());
                 // setting button pos
                 button.transform.SetParent(buttonTemplate.transform.parent, false);
 

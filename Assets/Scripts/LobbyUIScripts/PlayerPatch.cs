@@ -14,8 +14,7 @@ public class PlayerPatch : MonoBehaviour
         {
             using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://lobbyservice.mooo.com:8080/players/" + curPlayer.ID))
             {
-                // setting the player ready status to true 
-                curPlayer.PlayerReady = !curPlayer.PlayerReady;
+
                 string json = PlayerInfo.CreateJSON(curPlayer);
                 Debug.Log(json);
 

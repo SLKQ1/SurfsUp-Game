@@ -38,7 +38,7 @@ public class InLobby : MonoBehaviour
         InvokeRepeating("UpdateCurrentPlayers", 0f, 1f);
 
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (AllPlayersReady())
         {

@@ -12,6 +12,8 @@ TagManager:
   - LobbyNameField
   - MaxPlayerSlider
   - MaxPlayerLabel
+  - CurrentPlayersInLobby
+  - LobbyNameText
   layers:
   - Default
   - TransparentFX
