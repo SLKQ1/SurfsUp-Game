@@ -5,8 +5,6 @@ using Newtonsoft.Json;
 
 public class PlayerInfo 
 {
-
-    public static string PlayerNameStatic;
     public int ID { get; set; }
     public string Token { get; set; }
     public int LobbyID { get; set; }

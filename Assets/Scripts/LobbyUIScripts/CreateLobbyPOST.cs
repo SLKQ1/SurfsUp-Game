@@ -20,7 +20,7 @@ public class CreateLobbyPOST : MonoBehaviour
     {
         try
         {
-            string webAddr = "http://159.89.115.92:8080/lobbies/create";
+            string webAddr = "http://lobbyservice.mooo.com:8080/lobbies/create";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
             httpWebRequest.ContentType = "application/json; charset=utf-8";
