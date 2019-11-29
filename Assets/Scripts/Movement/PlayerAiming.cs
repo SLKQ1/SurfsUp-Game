@@ -44,10 +44,10 @@ public class PlayerAiming : NetworkBehaviour {
     }
 
     void Update () {
-        Debug.Log("ID: " + identity.netId + " hasAuthority: " + identity.hasAuthority);
+        //Debug.Log("ID: " + identity.netId + " hasAuthority: " + identity.hasAuthority);
         if (!identity.isLocalPlayer)
             return;
-        Debug.Log("ID: " + identity.netId + " is local player");
+        //Debug.Log("ID: " + identity.netId + " is local player");
 
         if (Input.GetButtonDown("unlock_mouse"))
         {
