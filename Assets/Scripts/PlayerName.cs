@@ -1,20 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerName : Mirror.NetworkBehaviour
+using Mirror;
+public class PlayerName : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SyncVar] public string playerUniqueIdentity;
+    private Transform myTransform;
+
+    public override void OnStartLocalPlayer()
     {
-		InvokeRepeating("SetName", 0f, 1f); 
+        GetNetIdentity();
+        SetIdentity();
     }
 
-    void SetName()
-	{
-		if (isLocalPlayer)
-		{
-            transform.GetChild(1).GetComponent<TextMesh>().text = PlayerInfo.PlayerNameStatic;
-		}
-	}
+    void Awake()
+    {
+        myTransform = transform;
+    }
+
+    void Update()
+    {
+        if(myTransform.name == "" || myTransform.name == "Player(Clone)")
+        {
+            SetIdentity();
+        } 
+    }
+
+
+
+    [Client]
+    void GetNetIdentity()
+    {
+        CmdTellServerMyIdentity(MakeUniqueIdentity());
+    }
+
+    [Client]
+    void SetIdentity()
+    {
+        if(!isLocalPlayer)
+        {
+            myTransform.GetChild(1).GetComponent<TextMesh>().text = playerUniqueIdentity;
+        } else
+        {
+            myTransform.GetChild(0).GetComponent<TextMesh>().text = MakeUniqueIdentity();
+        }
+    }
+
+    string MakeUniqueIdentity()
+    {
+        return PlayerInfo.PlayerNameStatic;
+    }
+
+    [Command]
+    void CmdTellServerMyIdentity(string name)
+    {
+        playerUniqueIdentity = name;
+    }
 }
