@@ -22,8 +22,8 @@ namespace Fragsurf.Movement {
         private Camera m_camera;
 
         [Header("Lives")]
-        [SerializeField]
-        private int lives = 3;
+        public int lives = 3;
+
         [SerializeField]
         private Vector3 Spectate_Area = new Vector3(0,0,0);
         [SerializeField]
@@ -99,6 +99,11 @@ namespace Fragsurf.Movement {
             get { return _groundObject; }
             set { _groundObject = value; }
 
+        }
+
+        public int getLives()
+        {
+            return this.lives;
         }
 
         public Vector3 baseVelocity { get { return _baseVelocity; } }
@@ -235,7 +240,6 @@ namespace Fragsurf.Movement {
             if (!isLocalPlayer)
                 return;
             //Debug.Log("ID: " + netId + " is local player");
-
             _colliderObject.transform.rotation = Quaternion.identity;
 
 

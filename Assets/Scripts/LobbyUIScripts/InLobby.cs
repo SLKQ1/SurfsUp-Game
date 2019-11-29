@@ -12,6 +12,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Mirror;
 
 public class InLobby : MonoBehaviour
 {
@@ -27,10 +28,13 @@ public class InLobby : MonoBehaviour
     private int[] curPlayers;
     // var to store lobby inorder to minimize API calls
     LobbyInfo curLobby;
-    //public GameObject networkObject;
+    public Mirror.NetworkManager NetworkManagerScript;
+    public TelepathyTransport TelepathyTransportScript;
+
     //Start is called before the first frame update
     void Start()
     {
+        
         InvokeRepeating("UpdateCurrentPlayers", 0f, 1f);
 
     }
@@ -38,10 +42,15 @@ public class InLobby : MonoBehaviour
     {
         if (AllPlayersReady())
         {
-            Set_Port_and_IP(this.lobbyID);
-			SceneManager.LoadScene(1);
+           
 
-            //networkObject.GetComponent<NetworkManagerHUD>().showGUI = true; 
+            Set_Port_and_IP(this.lobbyID);
+            SceneManager.LoadScene(1);
+            //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
+            GameStateManager.maxPlayers = curPlayers.Length; 
+           
+            Mirror.NetworkManager networkObject = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<Mirror.NetworkManager>();
+            networkObject.StartClient(); 
 
         }
     }
@@ -110,7 +119,7 @@ public class InLobby : MonoBehaviour
 
         using (var httpClient = new HttpClient())
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://lobbyservice.mooo.com:8080/players/" + playerID))
+            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://159.89.115.92:8080/players/" + playerID))
             {
                 // setting the player ready status to true 
                 curPlayer.PlayerReady = !curPlayer.PlayerReady;
@@ -122,6 +131,7 @@ public class InLobby : MonoBehaviour
 
                 var response = await httpClient.SendAsync(request);
             }
+            //GameObject.FindGameObjectWithTag("NetworkObject").SendMessage("SetPlayerName", playerName); 
         }
 
 
