@@ -17,7 +17,7 @@ public class CreatePlayerPOST : MonoBehaviour
 
             string json = PlayerInfo.CreateJSON(newPlayer);
 
-            Debug.Log(json);
+  
 
             streamWriter.Write(json);
         }
@@ -27,6 +27,7 @@ public class CreatePlayerPOST : MonoBehaviour
             var result = streamReader.ReadToEnd();
             // creating a player with the result
             PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
+            Debug.Log(result);
             return NewPlayer;
 
         }

@@ -26,19 +26,66 @@ public class LobbyManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); 
     }
 
-    public void CreatePlayerMenu()
+    public void CreateInLobbyMenu()
     {
         MainMenu.SetActive(false);
         lobbyListMenu.SetActive(false);
         createLobbyMenu.SetActive(false);
-        createPlayerMenu.SetActive(true);
+        createPlayerMenu.SetActive(false);
+        inLobbyMenu.SetActive(true);
+
+    }
+
+    public void CreateLobbyMenu()
+    {
+        MainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(true);
+        createPlayerMenu.SetActive(false);
         inLobbyMenu.SetActive(false);
+    }
+
+    public void CreateLobbyListMenu()
+    {
+        MainMenu.SetActive(false);
+        lobbyListMenu.SetActive(true);
+        createLobbyMenu.SetActive(false);
+        createPlayerMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+    }
+
+    public void CreatePlayerMenu()
+    {
+        // checking if players already exists 
+        if (CurrentPlayer.curPlayer == null)
+        {
+            MainMenu.SetActive(false);
+            lobbyListMenu.SetActive(false);
+            createLobbyMenu.SetActive(false);
+            createPlayerMenu.SetActive(true);
+            inLobbyMenu.SetActive(false);
+        }
+        else
+        {
+
+            CreateLobbyListMenu();
+        }
 
     }
 
     public void StartSoloGame()
     {
         SoloGame.SoloGameJoin(); 
+    }
+
+    public void BackTOMainMenu()
+    {
+        MainMenu.SetActive(true);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        createPlayerMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+
     }
 
     public void QuitGame()

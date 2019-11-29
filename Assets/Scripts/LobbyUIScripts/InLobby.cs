@@ -114,7 +114,7 @@ public class InLobby : MonoBehaviour
     }
 
     // method to patch players ready status 
-    private async Task PatchReadyStatusAsync(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
+    public async Task PatchReadyStatusAsync(int playerID, string playerName, string playerTeam, bool playerReady, PlayerInfo curPlayer)
     {
 
         using (var httpClient = new HttpClient())

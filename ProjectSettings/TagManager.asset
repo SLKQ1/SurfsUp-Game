@@ -8,6 +8,10 @@ TagManager:
   - LobbyIDText
   - LobbyListButton
   - GameStateManager
+  - PlayerNameField
+  - LobbyNameField
+  - MaxPlayerSlider
+  - MaxPlayerLabel
   layers:
   - Default
   - TransparentFX
