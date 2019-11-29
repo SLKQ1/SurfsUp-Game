@@ -21,8 +21,10 @@ public class SoloGame : MonoBehaviour
         Debug.Log("Player ID: " + newPlayer.ID);
         // posting player
         CreatePlayerPOST creatingPlayer = new CreatePlayerPOST();
-        creatingPlayer.CreatePlayer(newPlayer); 
-        
+        creatingPlayer.CreatePlayer(newPlayer);
+
+        PlayerInfo.PlayerNameStatic = newPlayer.PlayerName;
+
 
         // setting ip and port 
         PortAndIP setPortAndIP = new PortAndIP();
