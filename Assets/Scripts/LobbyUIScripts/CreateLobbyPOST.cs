@@ -10,17 +10,18 @@ public class CreateLobbyPOST : MonoBehaviour
 {
     InputField MaximumPlayers;
 
-    public void CreateLobby(string gameType, int maxPlayers)
+    public LobbyInfo CreateLobby(string gameType, int maxPlayers)
     {
-        POSTLobby(gameType, maxPlayers); 
+        string response = POSTLobby(gameType, maxPlayers);
+        return LobbyInfo.CreateFromJSON(response); 
     }
  
  
-    private void POSTLobby(string gameType, int maxPlayers)
+    private string POSTLobby(string gameType, int maxPlayers)
     {
         try
         {
-            string webAddr = "http://159.89.115.92:8080/lobbies/create";
+            string webAddr = "http://lobbyservice.mooo.com:8080/lobbies/create";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
             httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -48,13 +49,15 @@ public class CreateLobbyPOST : MonoBehaviour
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
-                var responseText = streamReader.ReadToEnd();
+                string responseText = streamReader.ReadToEnd();
                 Console.WriteLine(responseText);
+                return responseText; 
             }
         }
         catch (WebException ex)
         {
             Console.WriteLine(ex.Message);
+            return ""; 
         }
 
     }

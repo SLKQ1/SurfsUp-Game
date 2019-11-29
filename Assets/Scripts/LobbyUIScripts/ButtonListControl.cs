@@ -44,15 +44,18 @@ public class ButtonListControl : MonoBehaviour
         // loop to create lobby buttons 
         for (int i = 0; i < LobbyList.Count; i++)
         {
-            // making button and making visible
-            GameObject button = Instantiate(buttonTemplate) as GameObject;
-            button.tag = "LobbyListButton"; 
-            button.SetActive(true);
+            if (!LobbyList[i].IsStarted) {
+                // making button and making visible
+                GameObject button = Instantiate(buttonTemplate) as GameObject;
+                button.tag = "LobbyListButton"; 
+                button.SetActive(true);
 
-            // setting button text to be the lobby id and if it is started or not
-            button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID, "Lobby ID: " + LobbyList[i].ID + ", Is started: " + LobbyList[i].IsStarted);
-            // setting button pos
-            button.transform.SetParent(buttonTemplate.transform.parent, false);
+                // setting button text to be the lobby id and if it is started or not
+                button.GetComponent<ButtonListButton>().SetText(LobbyList[i].ID, "Lobby ID: " + LobbyList[i].ID + ", Is started: " + LobbyList[i].IsStarted);
+                // setting button pos
+                button.transform.SetParent(buttonTemplate.transform.parent, false);
+
+            }
         }
 
     }

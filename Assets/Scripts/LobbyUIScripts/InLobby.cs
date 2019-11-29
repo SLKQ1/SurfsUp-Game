@@ -119,7 +119,7 @@ public class InLobby : MonoBehaviour
 
         using (var httpClient = new HttpClient())
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://159.89.115.92:8080/players/" + playerID))
+            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://lobbyservice.mooo.com:8080/players/" + playerID))
             {
                 // setting the player ready status to true 
                 curPlayer.PlayerReady = !curPlayer.PlayerReady;
