@@ -4,6 +4,7 @@ using UnityEngine;
 using Fragsurf.Movement;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameStateManager : MonoBehaviour
 
             foreach (GameObject player in players)
             {
-                string name = player.transform.GetChild(1).GetComponent<TextMesh>().text;
+                string name = player.transform.GetChild(1).GetComponent<TextMeshPro>().text;
                 int lives = player.GetComponent<SurfCharacter>().getLives();
                 if (lives > 0)
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 public class PlayerName : NetworkBehaviour
 {
     [SyncVar] public string playerUniqueIdentity;
@@ -39,10 +40,10 @@ public class PlayerName : NetworkBehaviour
     {
         if(!isLocalPlayer)
         {
-            myTransform.GetChild(1).GetComponent<TextMesh>().text = playerUniqueIdentity;
+            myTransform.GetChild(1).GetComponent<TextMeshPro>().text = playerUniqueIdentity;
         } else
         {
-            myTransform.GetChild(0).GetComponent<TextMesh>().text = MakeUniqueIdentity();
+            myTransform.GetChild(0).GetComponent<TextMeshPro>().text = MakeUniqueIdentity();
         }
     }
 
