@@ -7,7 +7,6 @@ TagManager:
   - NetworkObject
   - LobbyIDText
   - LobbyListButton
-  - GameStateManager
   layers:
   - Default
   - TransparentFX

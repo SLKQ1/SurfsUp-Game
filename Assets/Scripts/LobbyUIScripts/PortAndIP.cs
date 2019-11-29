@@ -20,12 +20,12 @@ public class PortAndIP : MonoBehaviour
         // getting the IP and setting it from the NetworkManagerScript 
         var NetworkManagerScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<NetworkManager>();
         NetworkManagerScript.networkAddress = Port_and_IP.IPAddress;
-
+        //Debug.Log(NetworkManagerScript.networkAddress);
 
         // getting the port and setting it from the TelepathyTransport script
         var TelepathyTransportScript = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<TelepathyTransport>();
         TelepathyTransportScript.port = (ushort)Port_and_IP.Port;
-
+        //Debug.Log(TelepathyTransportScript.port);
 
     }
 

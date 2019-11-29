@@ -428,7 +428,7 @@ namespace Fragsurf.Movement {
                 Debug.Log("Here 2");
                 return false;
             }
-            //Debug.Log("Here 3");
+            Debug.Log("Here 3");
             _surfer.moveData.surfaceFriction = 1f;
             var movingUp = _surfer.moveData.velocity.y > 0f;
             var trace = TraceToFloor ();

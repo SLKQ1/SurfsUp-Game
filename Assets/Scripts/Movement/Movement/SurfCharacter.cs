@@ -101,11 +101,6 @@ namespace Fragsurf.Movement {
 
         }
 
-        public int getLives()
-        {
-            return this.lives;
-        }
-
         public Vector3 baseVelocity { get { return _baseVelocity; } }
 
         public Vector3 forward { get { return viewTransform.forward; } }
