@@ -9,7 +9,7 @@ public class InLobbyMenu : MonoBehaviour
     TextMeshProUGUI currentPlayersInLobbyText;
     TextMeshProUGUI currentLobbyText;
 
-    public void Start()
+    public void OnEnable()
     {
         currentPlayersInLobbyText = GameObject.FindGameObjectWithTag("CurrentPlayersInLobby").GetComponent<TextMeshProUGUI>();
         currentLobbyText = GameObject.FindGameObjectWithTag("LobbyNameText").GetComponent<TextMeshProUGUI>();
