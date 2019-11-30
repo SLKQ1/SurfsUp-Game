@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 
-public class CreatePlayerPOST : MonoBehaviour
+public class CreatePlayerPOST
 {
     public PlayerInfo CreatePlayer(PlayerInfo newPlayer)
     {

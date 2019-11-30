@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class PlayerPatch : MonoBehaviour
+public class PlayerPatch
 {
     public async Task PatchPlayer(PlayerInfo curPlayer)
     {
@@ -23,7 +23,6 @@ public class PlayerPatch : MonoBehaviour
 
                 var response = await httpClient.SendAsync(request);
             }
-            //GameObject.FindGameObjectWithTag("NetworkObject").SendMessage("SetPlayerName", playerName); 
         }
 
 

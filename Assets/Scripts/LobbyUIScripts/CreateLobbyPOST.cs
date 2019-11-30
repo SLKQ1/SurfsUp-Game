@@ -6,7 +6,7 @@ using System.Net;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class CreateLobbyPOST : MonoBehaviour
+public class CreateLobbyPOST
 {
     InputField MaximumPlayers;
 

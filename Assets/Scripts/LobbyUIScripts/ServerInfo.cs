@@ -4,7 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 
-public class ServerInfo : MonoBehaviour
+public class ServerInfo
 {
     public int ID;
     public int LobbyID;
