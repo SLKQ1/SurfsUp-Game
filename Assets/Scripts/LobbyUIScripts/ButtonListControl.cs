@@ -12,15 +12,16 @@ public class ButtonListControl : MonoBehaviour
     // json parser 
     private JSONParser LobbyParser = new JSONParser();
     // storing old lobby size
-    private int prev_lobbyListSize;
+    private List<LobbyInfo> prev_lobbyList;
 
-    private void Start()
+    private void OnEnable()
     {
+        DestroyAllButtons();
         GenButtons();
-        //InvokeRepeating("DestroyAllButtons", 0f, 5f); 
+        InvokeRepeating("UpdateButtonList", 0f, 1f);
 
     }
-    private void Update()
+    private void UpdateButtonList()
     {
         if (LobbyListChanged())
         {
@@ -45,7 +46,7 @@ public class ButtonListControl : MonoBehaviour
     void GenButtons()
     {
         List<LobbyInfo> LobbyList = LobbyParser.GetListLobbies();
-        prev_lobbyListSize = LobbyList.Count;
+        prev_lobbyList = LobbyList;
 
         // loop to create lobby buttons 
         for (int i = 0; i < LobbyList.Count; i++)
@@ -78,8 +79,8 @@ public class ButtonListControl : MonoBehaviour
     }
     private bool LobbyListChanged()
     {
-        int new_lobbyListSize = LobbyParser.GetListLobbies().Count;
-        if (prev_lobbyListSize != new_lobbyListSize)
+        List<LobbyInfo> new_lobbyList = LobbyParser.GetListLobbies();
+        if (prev_lobbyList.Count != new_lobbyList.Count)
         {
             return true;
         }
