@@ -1133,9 +1133,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   m_camera: {fileID: 7767308770119557865}
-  lives: 3
+  lives: 10
   Spectate_Area: {x: -7, y: 155, z: 2}
-  Max_Time_Grounded: 7.5
+  Max_Time_Grounded: 15
   Lives_Text: {fileID: 1643244425913402902}
   Speed_Text: {fileID: 125797061295913129}
   Grounded_Text: {fileID: 1427338636429354391}

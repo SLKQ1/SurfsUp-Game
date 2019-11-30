@@ -30,12 +30,12 @@ public class ButtonListControl : MonoBehaviour
         }
     }
 
-    public void ButtonClicked(int LobbyID)
+    public async void ButtonClicked(int LobbyID)
     {
         PlayerPatch newPlayerPatch = new PlayerPatch();
         // changing players lobby id 
         CurrentPlayer.curPlayer.LobbyID = LobbyID;
-        newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+        await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
         // changing the panel to lobby instance
         LobbyManager.Instance.CreateInLobbyMenu();

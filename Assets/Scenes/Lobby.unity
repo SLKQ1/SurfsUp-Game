@@ -5106,7 +5106,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 40
-  m_CharacterLimit: 15
+  m_CharacterLimit: 50
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -6788,7 +6788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonTemplate: {fileID: 80320771}
-  joinLobby: {fileID: 0}
 --- !u!114 &1761507778
 MonoBehaviour:
   m_ObjectHideFlags: 0

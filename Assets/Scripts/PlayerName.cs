@@ -43,7 +43,11 @@ public class PlayerName : NetworkBehaviour
             myTransform.GetChild(1).GetComponent<TextMeshPro>().text = playerUniqueIdentity;
         } else
         {
-            myTransform.GetChild(0).GetComponent<TextMeshPro>().text = MakeUniqueIdentity();
+            TextMeshPro namePlate = myTransform.GetChild(0).GetComponent<TextMeshPro>();
+            if (namePlate != null)
+            {
+                namePlate.text = MakeUniqueIdentity();
+            }
         }
     }
 
