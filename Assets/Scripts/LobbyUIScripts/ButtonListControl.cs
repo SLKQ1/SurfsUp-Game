@@ -80,6 +80,15 @@ public class ButtonListControl : MonoBehaviour
     private bool LobbyListChanged()
     {
         List<LobbyInfo> new_lobbyList = LobbyParser.GetListLobbies();
+
+        // seeing if player count has changed
+        for (int i = 0; i < prev_lobbyList.Count; i++)
+        {
+            if (prev_lobbyList[i].CurrentPlayers.Length != new_lobbyList[i].CurrentPlayers.Length)
+            {
+                return true; 
+            }
+        }
         if (prev_lobbyList.Count != new_lobbyList.Count)
         {
             return true;
