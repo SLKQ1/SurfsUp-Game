@@ -12,13 +12,11 @@ public class SoloGame : MonoBehaviour
         // making lobby 
         CreateLobbyPOST creatingLobby = new CreateLobbyPOST();
         LobbyInfo newLobby = creatingLobby.CreateLobby("Solo", 1);
-        Debug.Log("Lobby ID " + newLobby.ID); 
         // making player object  
         PlayerInfo newPlayer = new PlayerInfo();
         newPlayer.LobbyID = newLobby.ID;
         newPlayer.PlayerReady = true;
         newPlayer.PlayerName = "Player";
-        Debug.Log("Player ID: " + newPlayer.ID);
         // posting player
         CreatePlayerPOST creatingPlayer = new CreatePlayerPOST();
         creatingPlayer.CreatePlayer(newPlayer);

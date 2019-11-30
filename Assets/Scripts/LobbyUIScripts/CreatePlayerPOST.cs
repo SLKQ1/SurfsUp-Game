@@ -27,7 +27,6 @@ public class CreatePlayerPOST
             var result = streamReader.ReadToEnd();
             // creating a player with the result
             PlayerInfo NewPlayer = PlayerInfo.CreateFromJSON(result);
-            Debug.Log(result);
             return NewPlayer;
 
         }
