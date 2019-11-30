@@ -8,9 +8,7 @@ public class ButtonListControl : MonoBehaviour
     [SerializeField]
     private GameObject buttonTemplate;
 
-    //public Text LobbyIDText;
-    // ref to join lobby canvas
-    public JoinLobby joinLobby;
+    // field to store buttons 
     private GameObject[] gameObjects;
 
     private void Start()
