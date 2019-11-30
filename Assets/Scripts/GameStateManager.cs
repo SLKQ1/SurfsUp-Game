@@ -14,7 +14,7 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("GameState", 0f, 1f);
+        InvokeRepeating("GameState", 5f, 1f);
     }
 
     private void GameState()
@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour
             foreach (GameObject player in players)
             {
                 string name = player.transform.GetChild(1).GetComponent<TextMeshPro>().text;
-                int lives = player.GetComponent<SurfCharacter>().getLives();
+                int lives = player.GetComponent<SurfCharacter>().lives;
                 if (lives > 0)
                 {
                     winnerName = name;
@@ -58,6 +58,15 @@ public class GameStateManager : MonoBehaviour
                     }
                 }
 
+            } else if (players.Length == 1)
+            {
+                if (players[0].GetComponent<SurfCharacter>().lives == 0)
+                {
+                    players[0].transform.GetChild(3).GetChild(3).GetComponent<Text>().text = "You, Win!";
+                    players[0].transform.GetChild(3).GetChild(4).GetComponent<Image>().enabled = true;
+                    players[0].transform.GetChild(3).GetChild(4).GetComponent<Button>().enabled = true;
+                    players[0].transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().enabled = true;
+                }
             }
         }
     }

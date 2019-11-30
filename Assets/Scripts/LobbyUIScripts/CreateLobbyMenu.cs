@@ -14,7 +14,7 @@ public class CreateLobbyMenu : MonoBehaviour
 
         maxPlayersLabel.text = "Max Players: " + maxPlayers.value.ToString(); 
     }
-    public void CreateLobby()
+    public async void CreateLobby()
     {
         TMP_InputField lobbyName = GameObject.FindGameObjectWithTag("LobbyNameField").GetComponent<TMP_InputField>();
         maxPlayersLabel = GameObject.FindGameObjectWithTag("MaxPlayerLabel").GetComponent<TextMeshProUGUI>();
@@ -29,7 +29,7 @@ public class CreateLobbyMenu : MonoBehaviour
 
             CurrentPlayer.curPlayer.LobbyID = createdLobby.ID;
             PlayerPatch newPlayerPatch = new PlayerPatch();
-            newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+            await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
             Debug.Log(CurrentPlayer.curPlayer.LobbyID); 
             // changing panel to be lobby instance

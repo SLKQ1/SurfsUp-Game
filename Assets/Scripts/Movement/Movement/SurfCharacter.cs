@@ -22,7 +22,7 @@ namespace Fragsurf.Movement {
         private Camera m_camera;
 
         [Header("Lives")]
-        public int lives = 3;
+        [SyncVar] public int lives = 10;
 
         [SerializeField]
         private Vector3 Spectate_Area = new Vector3(0,0,0);
@@ -30,6 +30,7 @@ namespace Fragsurf.Movement {
         private float Max_Time_Grounded = 10f;
         private float time_grounded = 0f;
 
+        private bool isSpectating = false;
 
         [Header("UI")]
         [SerializeField]
@@ -101,11 +102,6 @@ namespace Fragsurf.Movement {
 
         }
 
-        public int getLives()
-        {
-            return this.lives;
-        }
-
         public Vector3 baseVelocity { get { return _baseVelocity; } }
 
         public Vector3 forward { get { return viewTransform.forward; } }
@@ -137,7 +133,7 @@ namespace Fragsurf.Movement {
 
         private void Start () {
             if (isLocalPlayer)
-                Lives_Text.text = "Lives: "+lives;
+                Lives_Text.text = "Lives: "+ lives;
 
             _colliderObject = new GameObject ("PlayerCollider");
             _colliderObject.layer = gameObject.layer;
@@ -277,7 +273,7 @@ namespace Fragsurf.Movement {
                 _controller.Crouch (this, movementConfig, Time.deltaTime);
 
             _controller.ProcessMovement (this, movementConfig, Time.deltaTime);
-            if (lives > 0)
+            if (GetLives() > 0)
             {
                 if (moveData.velocity.y == 0f)
                 {
@@ -292,32 +288,67 @@ namespace Fragsurf.Movement {
 
             _colliderObject.transform.rotation = Quaternion.identity;
 
-            Speed_Text.text = "Speed: " + _controller.speed.ToString("F2");
-            Grounded_Text.text = "Time to death: " + (Max_Time_Grounded - time_grounded).ToString("F2");
+
+            if (GetLives() <= 0)
+            {
+  
+
+                if(!isSpectating)
+                {
+                    moveData.velocity = Vector3.zero;
+                    moveData.origin = Spectate_Area;
+
+                    Grounded_Text.text = "";
+                    Speed_Text.text = "Spectating";
+                    Lives_Text.text = "Lives: " + GetLives();
+
+                    isSpectating = true;
+
+
+                }
+            }
+            else
+            {
+                Lives_Text.text = "Lives: " + GetLives();
+                Speed_Text.text = "Speed: " + _controller.speed.ToString("F2");
+                Grounded_Text.text = "Time to death: " + (Max_Time_Grounded - time_grounded).ToString("F2");
+            }
         }
 
         private void UpdateTestBinds () {
 
             if (Input.GetKeyDown (KeyCode.Backspace))
-                Death ();
+                Death();
 
+        }
+
+        [Client]
+        int GetLives()
+        {
+            return lives;
+        }
+
+        [Client]
+        void TakeDamage()
+        {
+            CmdDamage();
+        }
+
+        [Command]
+        void CmdDamage()
+        {
+            lives -= 1;
         }
 
         public void Death ()
         {
-            lives--;
+            TakeDamage();
             time_grounded = 0;
-            if (lives > 0)
+            if (GetLives() > 0)
             {
                 moveData.velocity = Vector3.zero;
                 moveData.origin = _startPosition;
-            }else
-            {
-                moveData.velocity = Vector3.zero;
-                moveData.origin = Spectate_Area;
             }
-            if (isLocalPlayer)
-                Lives_Text.text = "Lives: " + lives;
         }
 
         private void UpdateMoveData () {

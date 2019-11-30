@@ -179,6 +179,29 @@ namespace Mirror
         {
             Debug.Log("Thank you for using Mirror! https://mirror-networking.com");
 
+            // Parse command line arguments and set max connections specified by the --maxconnections flag.
+            string[] args = System.Environment.GetCommandLineArgs();
+            if (args.Length > 0)
+            {
+                bool connectionsSet = false;
+                foreach (string s in args)
+                {
+                    if (connectionsSet)
+                    {
+                        maxConnections = int.Parse(s);
+                        break;
+                    }
+                    else if (s.ToLower().Equals("--maxconnections"))
+                    {
+                        connectionsSet = true;
+                    }
+
+                }
+            }
+
+            Debug.Log("Now using: " + maxConnections + " max connections.");
+
+
             // Set the networkSceneName to prevent a scene reload
             // if client connection to server fails.
             networkSceneName = offlineScene;

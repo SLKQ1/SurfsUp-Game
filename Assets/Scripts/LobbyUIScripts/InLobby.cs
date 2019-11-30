@@ -169,12 +169,12 @@ public class InLobby : MonoBehaviour
     }
 
 
-    public void OnClick()
+    public async void OnClick()
     {
         string name = this.currentPlayer.PlayerName;
         string team = this.currentPlayer.PlayerTeam;
         int id = this.currentPlayer.ID;
         bool isReady = this.currentPlayer.PlayerReady; 
-        PatchReadyStatusAsync(id, name, team, isReady, this.currentPlayer); 
+        await PatchReadyStatusAsync(id, name, team, isReady, this.currentPlayer); 
     }
 }

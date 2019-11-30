@@ -63,12 +63,12 @@ public class InLobbyMenu : MonoBehaviour
 
     }
 
-    public void PlayerLeavePatch()
+    public async void PlayerLeavePatch()
     {
         PlayerPatch newPlayerPatch = new PlayerPatch();
         // changing players lobby id 
         CurrentPlayer.curPlayer.LobbyID = 0;
-        newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+        await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
         // changing the panel to lobby instance 
         LobbyManager.Instance.MainMenu.SetActive(false);
@@ -78,12 +78,12 @@ public class InLobbyMenu : MonoBehaviour
         LobbyManager.Instance.inLobbyMenu.SetActive(false);
 
     }
-    public void PlayerReady()
+    public async void PlayerReady()
     {
         PlayerPatch newPlayerPatch = new PlayerPatch();
         // changing players lobby id 
         CurrentPlayer.curPlayer.PlayerReady = !CurrentPlayer.curPlayer.PlayerReady;
-        newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+        await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
     }
 
