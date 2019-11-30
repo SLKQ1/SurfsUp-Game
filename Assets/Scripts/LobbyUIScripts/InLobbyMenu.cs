@@ -68,6 +68,8 @@ public class InLobbyMenu : MonoBehaviour
         PlayerPatch newPlayerPatch = new PlayerPatch();
         // changing players lobby id 
         CurrentPlayer.curPlayer.LobbyID = 0;
+        // changing playrs ready status
+        CurrentPlayer.curPlayer.PlayerReady = false; 
         await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
 		// changing the panel to lobby instance
