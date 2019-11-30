@@ -21,7 +21,7 @@ public class CreateLobbyPOST
     {
         try
         {
-            string webAddr = "http://lobbyservice.mooo.com:8080/lobbies/create";
+            string webAddr = JSONParser.url + "lobbies/create";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
             httpWebRequest.ContentType = "application/json; charset=utf-8";
@@ -40,8 +40,6 @@ public class CreateLobbyPOST
 
                 };
                 string json = LobbyInfo.CreateJSON(newLobby);
-                //Debug.Log(json);
-                //string json = "{\"GameType\":\"" + gameType + "\",\"" + "Joinable\":" + isJoinable + "," + "\"MaximumPlayers\":" + maxPlayers + "}";
 
                 streamWriter.Write(json);
                 streamWriter.Flush();

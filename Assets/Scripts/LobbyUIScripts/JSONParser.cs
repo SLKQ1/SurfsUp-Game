@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 public class JSONParser 
 {
     // url for the API 
-    private string url = "http://lobbyservice.mooo.com:8080/";
+    public static string url = "http://lobbyservice.mooo.com:8080/";
 
     // function to convert JSON string into list of LobbyInfo objects
     public List<LobbyInfo> GetListLobbies()

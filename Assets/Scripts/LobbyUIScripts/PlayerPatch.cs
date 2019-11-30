@@ -12,7 +12,7 @@ public class PlayerPatch
 
         using (var httpClient = new HttpClient())
         {
-            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), "http://lobbyservice.mooo.com:8080/players/" + curPlayer.ID))
+            using (var request = new HttpRequestMessage(new HttpMethod("PATCH"), JSONParser.url + "players/" + curPlayer.ID))
             {
 
                 string json = PlayerInfo.CreateJSON(curPlayer);

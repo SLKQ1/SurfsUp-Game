@@ -8,7 +8,7 @@ public class CreatePlayerPOST
 {
     public PlayerInfo CreatePlayer(PlayerInfo newPlayer)
     {
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://lobbyservice.mooo.com:8080/players/create");
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create(JSONParser.url + "players/create");
         httpWebRequest.ContentType = "application/json";
         httpWebRequest.Method = "POST";
 
