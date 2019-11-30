@@ -16,11 +16,7 @@ public class CreatePlayerMenu : MonoBehaviour
             CurrentPlayer.curPlayer = createPlayer.CreatePlayer(newPlayer);
             PlayerInfo.PlayerNameStatic = CurrentPlayer.curPlayer.PlayerName;
 
-            LobbyManager.Instance.lobbyListMenu.SetActive(true);
-            LobbyManager.Instance.MainMenu.SetActive(false);
-            LobbyManager.Instance.createLobbyMenu.SetActive(false);
-            LobbyManager.Instance.createPlayerMenu.SetActive(false);
-            LobbyManager.Instance.inLobbyMenu.SetActive(false);
+            LobbyManager.Instance.CreateLobbyListMenu(); 
         }
     }
 }

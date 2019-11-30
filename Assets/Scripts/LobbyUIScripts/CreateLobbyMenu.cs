@@ -31,13 +31,9 @@ public class CreateLobbyMenu : MonoBehaviour
             PlayerPatch newPlayerPatch = new PlayerPatch();
             await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
-            Debug.Log(CurrentPlayer.curPlayer.LobbyID); 
+            Debug.Log(CurrentPlayer.curPlayer.LobbyID);
             // changing panel to be lobby instance
-            LobbyManager.Instance.lobbyListMenu.SetActive(false);
-            LobbyManager.Instance.MainMenu.SetActive(false);
-            LobbyManager.Instance.createLobbyMenu.SetActive(false);
-            LobbyManager.Instance.createPlayerMenu.SetActive(false);
-            LobbyManager.Instance.inLobbyMenu.SetActive(true);
+            LobbyManager.Instance.CreateInLobbyMenu();
 
         }
 

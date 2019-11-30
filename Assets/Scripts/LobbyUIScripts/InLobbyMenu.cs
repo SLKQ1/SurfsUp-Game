@@ -70,12 +70,8 @@ public class InLobbyMenu : MonoBehaviour
         CurrentPlayer.curPlayer.LobbyID = 0;
         await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
-        // changing the panel to lobby instance 
-        LobbyManager.Instance.MainMenu.SetActive(false);
-        LobbyManager.Instance.lobbyListMenu.SetActive(true);
-        LobbyManager.Instance.createLobbyMenu.SetActive(false);
-        LobbyManager.Instance.createPlayerMenu.SetActive(false);
-        LobbyManager.Instance.inLobbyMenu.SetActive(false);
+		// changing the panel to lobby instance
+		LobbyManager.Instance.CreateLobbyListMenu(); 
 
     }
     public async void PlayerReady()
