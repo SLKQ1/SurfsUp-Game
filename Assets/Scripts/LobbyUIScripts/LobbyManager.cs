@@ -12,7 +12,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject lobbyListMenu;
     public GameObject createLobbyMenu;
     public GameObject inLobbyMenu;
-    public GameObject createPlayerMenu; 
+    public GameObject createPlayerMenu;
+    public GameObject createControlsMenu;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -23,6 +25,7 @@ public class LobbyManager : MonoBehaviour
         createLobbyMenu.SetActive(false);
         createPlayerMenu.SetActive(false);
         inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
         DontDestroyOnLoad(gameObject); 
     }
 
@@ -32,6 +35,7 @@ public class LobbyManager : MonoBehaviour
         lobbyListMenu.SetActive(false);
         createLobbyMenu.SetActive(false);
         createPlayerMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
         inLobbyMenu.SetActive(true);
 
     }
@@ -43,6 +47,7 @@ public class LobbyManager : MonoBehaviour
         createLobbyMenu.SetActive(true);
         createPlayerMenu.SetActive(false);
         inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
     }
 
     public void CreateLobbyListMenu()
@@ -52,7 +57,20 @@ public class LobbyManager : MonoBehaviour
         createLobbyMenu.SetActive(false);
         createPlayerMenu.SetActive(false);
         inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
     }
+
+    public void CreateControlsMenu()
+    {
+        MainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        createPlayerMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(true);
+
+    }
+
 
     public void CreatePlayerMenu()
     {
@@ -64,6 +82,7 @@ public class LobbyManager : MonoBehaviour
             createLobbyMenu.SetActive(false);
             createPlayerMenu.SetActive(true);
             inLobbyMenu.SetActive(false);
+            createControlsMenu.SetActive(false);
         }
         else
         {
@@ -85,6 +104,7 @@ public class LobbyManager : MonoBehaviour
         createLobbyMenu.SetActive(false);
         createPlayerMenu.SetActive(false);
         inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
 
     }
 
