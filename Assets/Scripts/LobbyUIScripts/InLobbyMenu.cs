@@ -110,4 +110,15 @@ public class InLobbyMenu : MonoBehaviour
 
     }
 
+    async void PlayerLeaveLobby()
+    {
+        CurrentPlayer.curPlayer.LobbyID = 0;
+        CurrentPlayer.curPlayer.PlayerReady = false;
+        await new PlayerPatch().PatchPlayer(CurrentPlayer.curPlayer);
+    }
+    void OnApplicationQuit()
+    {
+        this.PlayerLeaveLobby();
+    }
+
 }

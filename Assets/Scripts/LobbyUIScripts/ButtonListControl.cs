@@ -32,13 +32,16 @@ public class ButtonListControl : MonoBehaviour
 
     public async void ButtonClicked(int LobbyID)
     {
-        PlayerPatch newPlayerPatch = new PlayerPatch();
-        // changing players lobby id 
-        CurrentPlayer.curPlayer.LobbyID = LobbyID;
-        await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
+        if (!(LobbyParser.GetLobby(LobbyID).MaximumPlayers == LobbyParser.GetLobby(LobbyID).CurrentPlayers.Length))
+        {
+            PlayerPatch newPlayerPatch = new PlayerPatch();
+            // changing players lobby id 
+            CurrentPlayer.curPlayer.LobbyID = LobbyID;
+            await newPlayerPatch.PatchPlayer(CurrentPlayer.curPlayer);
 
-        // changing the panel to lobby instance
-        LobbyManager.Instance.CreateInLobbyMenu();
+            // changing the panel to lobby instance
+            LobbyManager.Instance.CreateInLobbyMenu();
+        }
 
     }
 
@@ -51,7 +54,7 @@ public class ButtonListControl : MonoBehaviour
         // loop to create lobby buttons 
         for (int i = 0; i < LobbyList.Count; i++)
         {
-            if (!LobbyList[i].IsStarted && !(LobbyList[i].CurrentPlayers.Length == LobbyList[i].MaximumPlayers))
+            if (!LobbyList[i].IsStarted)
             {
                 // making button and making visible
                 GameObject button = Instantiate(buttonTemplate) as GameObject;
