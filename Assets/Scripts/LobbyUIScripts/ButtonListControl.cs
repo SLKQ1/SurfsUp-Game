@@ -51,7 +51,7 @@ public class ButtonListControl : MonoBehaviour
         // loop to create lobby buttons 
         for (int i = 0; i < LobbyList.Count; i++)
         {
-            if (!LobbyList[i].IsStarted)
+            if (!LobbyList[i].IsStarted && !(LobbyList[i].CurrentPlayers.Length == LobbyList[i].MaximumPlayers))
             {
                 // making button and making visible
                 GameObject button = Instantiate(buttonTemplate) as GameObject;
