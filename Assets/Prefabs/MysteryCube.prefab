@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8173039819861285327}
   - component: {fileID: 8173039819861285326}
   - component: {fileID: 8173039819861285329}
-  - component: {fileID: 2578429550744482832}
+  - component: {fileID: 2542888330163660719}
+  - component: {fileID: 433218412453599378}
   m_Layer: 0
   m_Name: MysteryCube
   m_TagString: Untagged
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateAmount: {x: 0, y: 20, z: 0}
---- !u!114 &2578429550744482832
+--- !u!114 &2542888330163660719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,13 +116,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8173039819861285331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a513149bd1f8943bcd721c4229afb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pi: {fileID: 7802615471528096525, guid: 16673dc077c99ab4b8238e2b5c524d78, type: 3}
-  itemPrefabs:
-  - {fileID: 4962913735486445752, guid: f52b37b6338cd2a4d949458bd54e87f1, type: 3}
-  - {fileID: 9054470850487438263, guid: b743655133bde3240a246e9b8f6a1f64, type: 3}
-  - {fileID: 3725967112908819260, guid: 24fb0587fc3b07e41adb7dfc302c7565, type: 3}
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 6f8a49a0b728ac44f973211bd97629d4
+  m_SceneId: 0
+--- !u!114 &433218412453599378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173039819861285331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d19da42bdb94264a9d48078314c6726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   pickupEffect: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}
+  velocityMultiplier: 2
