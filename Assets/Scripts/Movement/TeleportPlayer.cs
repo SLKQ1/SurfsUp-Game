@@ -21,8 +21,10 @@ public class TeleportPlayer : NetworkBehaviour
     }
 
 	void OnTriggerEnter(Collider other)
-	{
-		GameObject player = other.transform.parent.gameObject;
+    {
+        if (other.transform.parent == null)
+            return;
+        GameObject player = other.transform.parent.gameObject;
         Transform playerTransform = player.GetComponent<Transform>();
         if (playerTransform != null)
         {

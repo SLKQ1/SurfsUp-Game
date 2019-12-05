@@ -27,6 +27,8 @@ public class Booster : NetworkBehaviour
 
     void OnTriggerEnter( Collider other )
     {
+        if (other.transform.parent == null)
+            return;
         GameObject player = other.transform.parent.gameObject;
         Quaternion playerRotation = player.GetComponent<Transform>().rotation;
         SurfCharacter surfCharacter = player.GetComponent<SurfCharacter>();

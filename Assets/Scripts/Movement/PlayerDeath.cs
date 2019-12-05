@@ -19,8 +19,10 @@ public class PlayerDeath : NetworkBehaviour
 	}
 
 	void OnTriggerEnter(Collider other)
-	{
-		GameObject player = other.transform.parent.gameObject;
+    {
+        if (other.transform.parent == null)
+            return;
+        GameObject player = other.transform.parent.gameObject;
 
 		SurfCharacter surfChar = player.GetComponent<SurfCharacter>();
 		if (surfChar != null)
