@@ -677,7 +677,7 @@ SpriteRenderer:
   m_Size: {x: 12.85, y: 9.88}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7517714881516564737
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   Lives_Text: {fileID: 1643244425913402902}
   Speed_Text: {fileID: 125797061295913129}
   Grounded_Text: {fileID: 1427338636429354391}
-  colliderSize: {x: 1, y: 2, z: 1}
+  colliderSize: {x: 1.5, y: 3, z: 1.5}
   collisionType: 0
   weight: 1
   rigidbodyPushForce: 1
@@ -1318,10 +1318,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9185724841914840060}
     m_Modifications:
-    - target: {fileID: 1391264739003710, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
-      propertyPath: m_Name
-      value: Bodyboard_1
-      objectReference: {fileID: 0}
     - target: {fileID: 4811705241225346, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -1377,6 +1373,10 @@ PrefabInstance:
     - target: {fileID: 4811705241225346, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391264739003710, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
+      propertyPath: m_Name
+      value: Bodyboard_1
       objectReference: {fileID: 0}
     - target: {fileID: 54372211874299730, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d,
         type: 3}
@@ -1496,10 +1496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9185724841914840060}
     m_Modifications:
-    - target: {fileID: 100000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
-      propertyPath: m_Name
-      value: 12983_Sunglasses_v2_l3
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.527
@@ -1555,6 +1551,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
+      propertyPath: m_Name
+      value: 12983_Sunglasses_v2_l3
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_Materials.Array.data[0]
