@@ -66,7 +66,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 63c94d638515d614cbfd683a95fe2120, type: 3}
     m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
@@ -309,6 +309,9 @@ MonoBehaviour:
   syncInterval: 0.1
   bodyTransform: {fileID: 9185724841914840060}
   identity: {fileID: 7548219289488666704}
+  exitButton: {fileID: 6620910128883065990}
+  exitButtonImage: {fileID: 1579581394574269301}
+  exitButtonText: {fileID: 3448080083787153816}
   sensitivityMultiplier: 1
   horizontalSensitivity: 1
   verticalSensitivity: 1
@@ -384,7 +387,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 63c94d638515d614cbfd683a95fe2120, type: 3}
     m_FontSize: 70
     m_FontStyle: 1
     m_BestFit: 0
@@ -957,7 +960,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 63c94d638515d614cbfd683a95fe2120, type: 3}
     m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
@@ -969,9 +972,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '
-
-'
+  m_Text: 
 --- !u!1 &8958858851884706458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1082,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 63c94d638515d614cbfd683a95fe2120, type: 3}
     m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
@@ -1199,6 +1200,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   m_camera: {fileID: 7767308770119557865}
+  m_aiming: {fileID: 1402079800042962058}
   lives: 10
   Spectate_Area: {x: -7, y: 155, z: 2}
   Max_Time_Grounded: 15
@@ -1318,6 +1320,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9185724841914840060}
     m_Modifications:
+    - target: {fileID: 1391264739003710, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
+      propertyPath: m_Name
+      value: Bodyboard_1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811705241225346, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -1374,9 +1380,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1391264739003710, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
-      propertyPath: m_Name
-      value: Bodyboard_1
+    - target: {fileID: 64953111917979534, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 54372211874299730, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d,
         type: 3}
@@ -1387,11 +1394,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 64953111917979534, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54372211874299730, guid: 2f7e3a30e7afcbe4ab5f0d09711efb3d, type: 3}
@@ -1496,6 +1498,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9185724841914840060}
     m_Modifications:
+    - target: {fileID: 100000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
+      propertyPath: m_Name
+      value: 12983_Sunglasses_v2_l3
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.527
@@ -1551,10 +1557,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
-      propertyPath: m_Name
-      value: 12983_Sunglasses_v2_l3
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 26e25b9c8568f2b42b0170c232b2cf28, type: 3}
       propertyPath: m_Materials.Array.data[0]

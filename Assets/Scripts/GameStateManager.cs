@@ -9,7 +9,7 @@ using TMPro;
 public class GameStateManager : MonoBehaviour
 {
 
-    private bool winnerFound = false;
+    public static bool winnerFound;
     public static int maxPlayers; 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +62,7 @@ public class GameStateManager : MonoBehaviour
             {
                 if (players[0].GetComponent<SurfCharacter>().lives == 0)
                 {
+                    winnerFound = true;
                     players[0].transform.GetChild(3).GetChild(3).GetComponent<Text>().text = "You, Win!";
                     players[0].transform.GetChild(3).GetChild(4).GetComponent<Image>().enabled = true;
                     players[0].transform.GetChild(3).GetChild(4).GetComponent<Button>().enabled = true;

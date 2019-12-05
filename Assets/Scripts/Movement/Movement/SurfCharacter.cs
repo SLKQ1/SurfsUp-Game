@@ -20,6 +20,8 @@ namespace Fragsurf.Movement {
 
         [SerializeField]
         private Camera m_camera;
+        [SerializeField]
+        private PlayerAiming m_aiming;
 
         [Header("Lives")]
         [SyncVar] public int lives = 10;
@@ -348,6 +350,7 @@ namespace Fragsurf.Movement {
             {
                 moveData.velocity = Vector3.zero;
                 moveData.origin = _startPosition;
+                m_aiming.resetRotation();
             }
         }
 

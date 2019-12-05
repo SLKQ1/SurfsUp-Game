@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class PlayerAiming : NetworkBehaviour {
 
@@ -9,6 +10,12 @@ public class PlayerAiming : NetworkBehaviour {
     public Transform bodyTransform;
     [SerializeField]
     private NetworkIdentity identity;
+    [SerializeField]
+    private Button exitButton;
+    [SerializeField]
+    private Image exitButtonImage;
+    [SerializeField]
+    private Text exitButtonText;
 
     [Header ("Sensitivity")]
     public float sensitivityMultiplier = 1f;
@@ -47,7 +54,6 @@ public class PlayerAiming : NetworkBehaviour {
         //Debug.Log("ID: " + identity.netId + " hasAuthority: " + identity.hasAuthority);
         if (!identity.isLocalPlayer)
             return;
-        //Debug.Log("ID: " + identity.netId + " is local player");
 
         if (Input.GetButtonDown("unlock_mouse"))
         {
@@ -58,10 +64,23 @@ public class PlayerAiming : NetworkBehaviour {
             if (lockMouse)
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                Debug.Log("GameState: "+ GameStateManager.winnerFound);
+                if (!GameStateManager.winnerFound)
+                {
+                    exitButton.enabled = false;
+                    exitButtonImage.enabled = false;
+                    exitButtonText.enabled = false;
+                }
             }
             else
             {
                 Cursor.lockState = CursorLockMode.None;
+                if (!GameStateManager.winnerFound)
+                {
+                    exitButton.enabled = true;
+                    exitButtonImage.enabled = true;
+                    exitButtonText.enabled = true;
+                }
             }
             Cursor.visible = !Cursor.visible;
         }
@@ -99,6 +118,12 @@ public class PlayerAiming : NetworkBehaviour {
         // Remove recoil
         transform.localEulerAngles = eulerAngles;
 
+    }
+
+    public void resetRotation()
+    {
+        bodyRotation = 0f;
+        cameraRotation = Vector3.zero;
     }
 
 }
