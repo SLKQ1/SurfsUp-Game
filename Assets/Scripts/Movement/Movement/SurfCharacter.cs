@@ -456,7 +456,13 @@ namespace Fragsurf.Movement {
 
         }
 
+        public bool IsLocalPlayer()
+        {
+            return isLocalPlayer;
+        }
+
     }
+
 
 }
 
