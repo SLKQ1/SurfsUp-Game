@@ -20,6 +20,7 @@ public class GameStateManager : MonoBehaviour
     private void GameState()
     {
 
+
         string winnerName = "Player";
         int deadPlayers = 0;
         
@@ -28,29 +29,14 @@ public class GameStateManager : MonoBehaviour
 
         if (!winnerFound)
         {
-            SurfCharacter localPlayer = null;
-            foreach (GameObject player in players)
-            {
-                SurfCharacter surfChar = player.transform.GetComponent<SurfCharacter>();
-                if (surfChar.IsLocalPlayer())
-                {
-                    localPlayer = surfChar;
-                }
-            }
-
 
             foreach (GameObject player in players)
             {
-                TextMeshPro nameTag = player.transform.GetChild(1).GetComponent<TextMeshPro>();
-                if (localPlayer != null)
-                {
-                    nameTag.transform.LookAt(localPlayer.transform, Vector3.up);
-                }
-                string m_name = nameTag.text;
+                string name = player.transform.GetChild(1).GetComponent<TextMeshPro>().text;
                 int lives = player.GetComponent<SurfCharacter>().lives;
                 if (lives > 0)
                 {
-                    winnerName = m_name;
+                    winnerName = name;
                 }
                 else if (lives == 0)
                 {
