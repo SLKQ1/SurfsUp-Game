@@ -48,6 +48,7 @@ public class InLobbyMenu : MonoBehaviour
                 //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
                 StartCoroutine(JoinGame(Lobby));
 
+                /**
                 LobbyManager.Instance.inLobbyMenu.SetActive(true);
                 LobbyManager.Instance.loadingScreen.SetActive(true);
                 LobbyManager.Instance.MainMenu.SetActive(false);
@@ -55,6 +56,7 @@ public class InLobbyMenu : MonoBehaviour
                 LobbyManager.Instance.createLobbyMenu.SetActive(false);
                 LobbyManager.Instance.createPlayerMenu.SetActive(false);
                 LobbyManager.Instance.createControlsMenu.SetActive(false);
+                **/
             }
             else
             {
