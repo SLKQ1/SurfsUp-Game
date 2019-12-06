@@ -14,6 +14,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject inLobbyMenu;
     public GameObject createPlayerMenu;
     public GameObject createControlsMenu;
+    public GameObject loadingScreen;
 
 
     // Start is called before the first frame update
@@ -113,6 +114,15 @@ public class LobbyManager : MonoBehaviour
         // setting ip and port 
         PortAndIP setPortAndIP = new PortAndIP();
         setPortAndIP.Set_Port_and_IP(newLobby.ID);
+
+
+        MainMenu.SetActive(false);
+        lobbyListMenu.SetActive(false);
+        createLobbyMenu.SetActive(false);
+        createPlayerMenu.SetActive(false);
+        inLobbyMenu.SetActive(false);
+        createControlsMenu.SetActive(false);
+        loadingScreen.SetActive(true);
 
         StartCoroutine(JoinGame());
     }
