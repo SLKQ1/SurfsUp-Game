@@ -16,6 +16,7 @@ TagManager:
   - LobbyNameText
   - InLobbyMenuReadyButton
   - InLobbyMenuBackButton
+  - SurferAnimation
   layers:
   - Default
   - TransparentFX
