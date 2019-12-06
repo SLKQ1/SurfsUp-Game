@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 public class InLobbyMenu : MonoBehaviour
 {
     TextMeshProUGUI currentPlayersInLobbyText;
     TextMeshProUGUI currentLobbyText;
+    [SerializeField]
+    Button readyButton;
+    [SerializeField]
+    Button leaveButton;
+
 
     public void OnEnable()
     {
@@ -46,19 +52,10 @@ public class InLobbyMenu : MonoBehaviour
                 PortAndIP port_and_ip = new PortAndIP();
                 port_and_ip.Set_Port_and_IP(Lobby.ID);
                 //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
-                GameObject.FindGameObjectWithTag("InLobbyMenuBackButton").SetActive(false);
-                GameObject.FindGameObjectWithTag("InLobbyMenuReadyButton").SetActive(false);
+                GameObject.FindGameObjectWithTag("InLobbyMenuBackButton").GetComponent<Button>().enabled = false;
+                GameObject.FindGameObjectWithTag("InLobbyMenuReadyButton").GetComponent<Button>().enabled = false; 
                 StartCoroutine(JoinGame(Lobby));
 
-                /**
-                LobbyManager.Instance.inLobbyMenu.SetActive(true);
-                LobbyManager.Instance.loadingScreen.SetActive(true);
-                LobbyManager.Instance.MainMenu.SetActive(false);
-                LobbyManager.Instance.lobbyListMenu.SetActive(false);
-                LobbyManager.Instance.createLobbyMenu.SetActive(false);
-                LobbyManager.Instance.createPlayerMenu.SetActive(false);
-                LobbyManager.Instance.createControlsMenu.SetActive(false);
-                **/
             }
             else
             {
