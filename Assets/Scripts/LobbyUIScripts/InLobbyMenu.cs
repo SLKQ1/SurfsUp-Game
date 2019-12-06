@@ -47,8 +47,22 @@ public class InLobbyMenu : MonoBehaviour
             JSONParser LobbyParser = new JSONParser();
             LobbyInfo Lobby = LobbyParser.GetLobby(CurrentPlayer.curPlayer.LobbyID);
 
-            if (AllPlayersReady(Lobby))
-            {
+            currentPlayersInLobbyText.text = "";
+            int readyPlayers = 0;
+            for (int i = 0; i < Lobby.CurrentPlayers.Length; i++){
+                int playerID = Lobby.CurrentPlayers[i];
+                PlayerInfo aPlayer = LobbyParser.GetPlayer(playerID);
+
+                string isReady = "Not Ready";
+                if (aPlayer.PlayerReady)
+                {
+                    readyPlayers++;
+                    isReady = "Ready";
+                }
+                currentPlayersInLobbyText.text += "\nPlayer Name: " + aPlayer.PlayerName + "\nPlayer Ready: " + isReady + "\n";
+
+            }
+                if (AllPlayersReady(Lobby)){
                 PortAndIP port_and_ip = new PortAndIP();
                 port_and_ip.Set_Port_and_IP(Lobby.ID);
                 //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
@@ -57,26 +71,7 @@ public class InLobbyMenu : MonoBehaviour
                 StartCoroutine(JoinGame(Lobby));
 
             }
-            else
-            {
-                currentPlayersInLobbyText.text = "";
-                int readyPlayers = 0;
-                for (int i = 0; i < Lobby.CurrentPlayers.Length; i++)
-                {
-                    int playerID = Lobby.CurrentPlayers[i];
-                    PlayerInfo aPlayer = LobbyParser.GetPlayer(playerID);
-
-                    string isReady = "Not Ready";
-                    if (aPlayer.PlayerReady)
-                    {
-                        readyPlayers++;
-                        isReady = "Ready";
-                    }
-                    currentPlayersInLobbyText.text += "\nPlayer Name: " + aPlayer.PlayerName + "\nPlayer Ready: " + isReady + "\n";
-
-                }
-            }
-
+           
         }
 
     }
