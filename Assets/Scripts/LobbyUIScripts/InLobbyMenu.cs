@@ -46,6 +46,8 @@ public class InLobbyMenu : MonoBehaviour
                 PortAndIP port_and_ip = new PortAndIP();
                 port_and_ip.Set_Port_and_IP(Lobby.ID);
                 //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
+                GameObject.FindGameObjectWithTag("InLobbyMenuBackButton").SetActive(false);
+                GameObject.FindGameObjectWithTag("InLobbyMenuReadyButton").SetActive(false);
                 StartCoroutine(JoinGame(Lobby));
 
                 /**
