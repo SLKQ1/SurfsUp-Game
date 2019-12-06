@@ -21,6 +21,19 @@ public class InLobbyMenu : MonoBehaviour
         InvokeRepeating("UpdatePlayersInLobby", 0f, 1f);
     }
 
+    IEnumerator JoinGame(LobbyInfo Lobby)
+    {
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(5);
+        // changing sence and starting client
+        //SceneManager.LoadScene(1);
+        GameStateManager.maxPlayers = Lobby.CurrentPlayers.Length;
+
+        Mirror.NetworkManager networkObject = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<Mirror.NetworkManager>();
+        networkObject.StartClient();
+
+    }
+
     private void UpdatePlayersInLobby()
     {
         if ((CurrentPlayer.curPlayer != null) && (CurrentPlayer.curPlayer.LobbyID != 0))
@@ -32,12 +45,16 @@ public class InLobbyMenu : MonoBehaviour
             {
                 PortAndIP port_and_ip = new PortAndIP();
                 port_and_ip.Set_Port_and_IP(Lobby.ID);
-                SceneManager.LoadScene(1);
                 //Mirror.NetworkClient.Connect(NetworkManagerScript.networkAddress);
-                GameStateManager.maxPlayers = Lobby.CurrentPlayers.Length;
+                StartCoroutine(JoinGame(Lobby));
 
-                Mirror.NetworkManager networkObject = GameObject.FindGameObjectWithTag("NetworkObject").GetComponent<Mirror.NetworkManager>();
-                networkObject.StartClient();
+                LobbyManager.Instance.MainMenu.SetActive(false);
+                LobbyManager.Instance.lobbyListMenu.SetActive(false);
+                LobbyManager.Instance.createLobbyMenu.SetActive(false);
+                LobbyManager.Instance.createPlayerMenu.SetActive(false);
+                LobbyManager.Instance.inLobbyMenu.SetActive(false);
+                LobbyManager.Instance.createControlsMenu.SetActive(false);
+                LobbyManager.Instance.loadingScreen.SetActive(true);
             }
             else
             {
