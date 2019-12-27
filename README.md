@@ -2,7 +2,7 @@
 SurfsUp! is a CS:GO Surf inspired game with new competative multiplayer elements. 
 
 ### Prerequisites
-The Game is built on the Unity game engine for familiarity with unity and the unity editor is benificial. It is also recommended that you have unity installed. 
+The Game is built on the Unity game engine so familiarity with Unity and the Unity editor is benificial. It is also recommended that you have Unity installed. 
 
 ### Getting Started 
 Use git or the download button to download the game source code. Or clone the project through the command line. 
